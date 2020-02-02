@@ -10,13 +10,19 @@ namespace StudyingApp.Models
 {
     public class User
     {
-        [Key]
         public int UserId { get; set; }
 
         public string FirstName { get; set; }
+
         public string LastName { get; set; }
+
         public string Login { get; set; }
+
         public string Password { get; set; }
-        public Role? UserRole { get; set; }
+
+        public Role UserRole { get; set; }
+
+        public virtual Student Student { get; set; }
+        public virtual Course Course { get; set; }
     }
 }
