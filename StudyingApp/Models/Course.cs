@@ -17,7 +17,7 @@ namespace StudyingApp.Models
 
         public DateTime EndDate { get; set; }
 
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         public virtual User User { get; set; }
 
         public virtual ICollection<Module> Modules { get; set; }

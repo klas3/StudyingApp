@@ -19,7 +19,7 @@ namespace StudyingApp.Models
 
         public bool IsVerified { get; set; }
 
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         public virtual User User { get; set; }
 
         public virtual ICollection<Listeners> Listeners { get; set; }
