@@ -9,8 +9,6 @@ namespace StudyingApp.Models
     {
         public int CourseId { get; set; }
 
-        public int TeacherId { get; set; }
-
         public string Name { get; set; }
 
         public int Year { get; set; }
@@ -18,5 +16,11 @@ namespace StudyingApp.Models
         public DateTime StartDate { get; set; }
 
         public DateTime EndDate { get; set; }
+
+        public int UserId { get; set; }
+        public virtual User User { get; set; }
+
+        public virtual ICollection<Module> Modules { get; set; }
+        public virtual ICollection<Listeners> Listeners { get; set; }
     }
 }

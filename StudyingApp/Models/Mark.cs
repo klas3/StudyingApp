@@ -9,10 +9,12 @@ namespace StudyingApp.Models
     {
         public int MarkId { get; set; }
 
+        public int MarkValue { get; set; }
+
         public int StudentId { get; set; }
+        public virtual Student Student { get; set; }
 
         public int TaskId { get; set; }
-
-        public int MarkValue { get; set; }
+        public virtual Task Task { get; set; }
     }
 }
