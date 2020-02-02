@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using StudyingApp.Data;
+using StudyingApp.Repositories;
 
 namespace StudyingApp
 {
@@ -24,6 +25,8 @@ namespace StudyingApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<IRepository, Repository>();
+
             services.AddControllersWithViews();
 
             services.AddDbContext<StudiyingAppContext>(options =>
