@@ -4,18 +4,18 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using StudyingApp.Models;
-
-
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace StudyingApp.Data
 {
-    public class StudiyingAppContext : DbContext
+    public class StudiyingAppContext : IdentityDbContext<User>
     {
         public StudiyingAppContext(DbContextOptions<StudiyingAppContext> options) : base(options)
         {
         }
 
-        public DbSet<User> Users {get; set;}
+        public DbSet<User> DBUsers { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<Module> Modules { get; set; }
@@ -26,27 +26,17 @@ namespace StudyingApp.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>().HasData(
-                new User
-                {
-                    UserId = 1,
-                    FirstName = "TestU",
-                    LastName = "UTest",
-                    Login = "userlogin",
-                    Password = "password",
-                    UserRole = Role.Student
-                }) ;
-            modelBuilder.Entity<Student>().HasData(
-                new Student
-                {
-                    StudentId = 1,
-                    University = "none",
-                    Faculty = "none",
-                    UniversityCourse = 1,
-                    Skills = "low",
-                    IsVerified = true,
-                    UserId = 1,
-                }) ;
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<User>()
+                .HasOne(user => user.Course)
+                .WithOne(course => course.User)
+                .HasForeignKey<Course>(course => course.UserId);
+
+            modelBuilder.Entity<User>()
+                .HasOne(user => user.Student)
+                .WithOne(student => student.User)
+                .HasForeignKey<Student>(student => student.UserId);
         }
     }    
 }
