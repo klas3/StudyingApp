@@ -41,7 +41,7 @@ namespace StudyingApp
             services.AddControllersWithViews();
 
             services.AddDbContext<StudiyingAppContext>(options =>
-                options.UseSqlite("Data Source=cupcake.db"));
+                options.UseSqlite("Data Source=study.db"));
 
             services.AddAuthorization(options =>
             {
