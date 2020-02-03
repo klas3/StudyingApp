@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using StudyingApp.Models;
 
 namespace StudyingApp.Repositories
 {
     public interface IRepository
     {
-        
+        IEnumerable<Student> GetStudentsList();
+        Student GetStudentById(int id);
+
     }
 }
