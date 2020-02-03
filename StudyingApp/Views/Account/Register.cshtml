@@ -1,4 +1,4 @@
-﻿
+﻿@model StudyingApp.ViewModels.RegisterViewModel
 @{
     Layout = null;
 }
@@ -9,7 +9,63 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Register</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/authorization.css" />
 </head>
 <body>
+    <div class="text-center">
+        <h1 class="display-4">Реєстрація</h1>
+    </div>
+    <form class="loginForm" method="post" enctype="multipart/form-data" asp-action="Login">
+        <div class="form-group">
+            <label asp-for="LastName">Прізвище</label>
+            <input type="text" class="form-control col-xs-4">
+        </div>
+        <div class="form-group">
+            <label asp-for="FirstName">Ім'я</label>
+            <input type="text" class="form-control col-xs-4">
+        </div>
+        <div class="form-group">
+            <label asp-for="MiddleName">По батькові</label>
+            <input type="text" class="form-control col-xs-4">
+        </div>
+        <div class="form-group">
+            <label asp-for="Email">Електронна пошта</label>
+            <input type="email" class="form-control col-xs-4">
+        </div>
+        <div class="form-group">
+            <label asp-for="Password">Пароль</label>
+            <input type="password" class="form-control">
+        </div>
+        <div class="form-group">
+            <label asp-for="University">Університет</label>
+            <input type="text" class="form-control col-xs-4">
+        </div>
+        <div class="form-group">
+            <label asp-for="Faculty">Факультет</label>
+            <input type="text" class="form-control col-xs-4">
+        </div>
+        <div class="form-group">
+            <label asp-for="Course">Курс</label>
+            <select class="form-control">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label asp-for="Skills">Вміння в галузі ІТ</label>
+            <textarea wrap="hard" class="form-control"></textarea>
+        </div>
+        <button type="submit" class="btn btn-success">
+            Зареєструватись
+        </button>
+        <button type="button" class="btn btn-info" onclick="location.href='@Url.Action("Login", "Account")'">
+            Увійти
+        </button>
+    </form>
 </body>
 </html>
