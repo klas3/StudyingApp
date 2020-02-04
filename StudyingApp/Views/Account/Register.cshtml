@@ -17,37 +17,50 @@
     <div class="text-center">
         <h1 class="display-4">Реєстрація</h1>
     </div>
-    <form class="loginForm" method="post" enctype="multipart/form-data" asp-action="Login">
+    <form class="loginForm" method="post" enctype="multipart/form-data" asp-action="Register">
+        <div asp-validation-summary="ModelOnly"></div>
         <div class="form-group">
-            <label asp-for="LastName">Прізвище</label>
+            <label asp-for="LastName"></label>
             <input type="text" class="form-control col-xs-4">
+            <span asp-validation-for="LastName"></span>
         </div>
         <div class="form-group">
-            <label asp-for="FirstName">Ім'я</label>
+            <label asp-for="FirstName"></label>
             <input type="text" class="form-control col-xs-4">
+            <span asp-validation-for="FirstName"></span>
         </div>
         <div class="form-group">
-            <label asp-for="MiddleName">По батькові</label>
+            <label asp-for="MiddleName"></label>
             <input type="text" class="form-control col-xs-4">
+            <span asp-validation-for="MiddleName"></span>
         </div>
         <div class="form-group">
-            <label asp-for="Email">Електронна пошта</label>
+            <label asp-for="Login"></label>
             <input type="email" class="form-control col-xs-4">
+            <span asp-validation-for="Login"></span>
         </div>
         <div class="form-group">
-            <label asp-for="Password">Пароль</label>
+            <label asp-for="Email"></label>
+            <input type="email" class="form-control col-xs-4">
+            <span asp-validation-for="Email"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Password"></label>
             <input type="password" class="form-control">
+            <span asp-validation-for="Password"></span>
         </div>
         <div class="form-group">
-            <label asp-for="University">Університет</label>
+            <label asp-for="University"></label>
             <input type="text" class="form-control col-xs-4">
+            <span asp-validation-for="University"></span>
         </div>
         <div class="form-group">
-            <label asp-for="Faculty">Факультет</label>
+            <label asp-for="Faculty"></label>
             <input type="text" class="form-control col-xs-4">
+            <span asp-validation-for="Faculty"></span>
         </div>
         <div class="form-group">
-            <label asp-for="Course">Курс</label>
+            <label asp-for="Course"></label>
             <select class="form-control">
                 <option>1</option>
                 <option>2</option>
@@ -55,16 +68,19 @@
                 <option>4</option>
                 <option>5</option>
             </select>
+            <span asp-validation-for="Course"></span>
         </div>
         <div class="form-group">
-            <label asp-for="Skills">Вміння в галузі ІТ</label>
+            <label asp-for="Skills"></label>
             <textarea wrap="hard" class="form-control"></textarea>
+            <span asp-validation-for="Skills"></span>
+        </div>
+        <div class="form-check form-group">
+            <input type="checkbox" class="form-check-input">
+            <label asp-for="RememberMe" class="form-check-label"></label>
         </div>
         <button type="submit" class="btn btn-success">
             Зареєструватись
-        </button>
-        <button type="button" class="btn btn-info" onclick="location.href='@Url.Action("Login", "Account")'">
-            Увійти
         </button>
     </form>
 </body>

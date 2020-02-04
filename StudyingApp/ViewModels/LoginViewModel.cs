@@ -8,13 +8,15 @@ namespace StudyingApp.ViewModels
 {
     public class LoginViewModel
     {
-        [Display(Name = "Ел. пошта")]
-        [Required(ErrorMessage = "Введіть вашу електронну пошту")]
-        [DataType(DataType.EmailAddress)]
-        public string Email { get; set; }
+        [Display(Name = "Логін")]
+        [Required(ErrorMessage = "Введіть ваш Логін")]
+        public string Login { get; set; }
 
         [Display(Name = "Пароль")]
         [Required(ErrorMessage = "Введіть ваш пароль")]
         public string Password { get; set; }
+
+        [Display(Name = "Замам'ятати мене")]
+        public bool RememberMe { get; set; }
     }
 }
