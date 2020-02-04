@@ -29,8 +29,23 @@ namespace StudyingApp.Repositories
 
         public void CreateStudent(Student student)
         {
-            _context.Add(student);
+            student.IsVerified = false;
+            _context.Students.Add(student);
             _context.SaveChanges();
         }
+
+        public void VerifyStudent(Student student)
+        {
+            student.IsVerified = true;
+        }
+
+        public void DeleteStudentById(int id)
+        {
+            var student = _context.Students.SingleOrDefault(s => s.StudentId == id);
+            _context.Students.Remove(student);
+            _context.SaveChanges();
+        }
+
+
     }
 }
