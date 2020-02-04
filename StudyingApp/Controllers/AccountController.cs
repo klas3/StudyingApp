@@ -17,13 +17,11 @@ namespace StudyingApp.Controllers
 
         private SignInManager<User> _signInManager;
         private UserManager<User> _userManager;
-        private RoleManager<IdentityRole> _roleManager;
 
-        public AccountController(SignInManager<User> signInManager, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
+        public AccountController(SignInManager<User> signInManager, UserManager<User> userManager)
         {
             _signInManager = signInManager;
             _userManager = userManager;
-            _roleManager = roleManager;
         }
 
         public IActionResult Login()
@@ -89,7 +87,6 @@ namespace StudyingApp.Controllers
                     }
 
                     var resultSignIn = await _signInManager.PasswordSignInAsync(model.Login, model.Password, model.RememberMe, false);
-                    Debug.Write(User);
                     if (resultSignIn.Succeeded)
                     {
                         return RedirectToAction("Index", "Home");
