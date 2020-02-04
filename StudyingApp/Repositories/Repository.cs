@@ -26,5 +26,11 @@ namespace StudyingApp.Repositories
         {
             return _context.Students.SingleOrDefault(s => s.StudentId == id);
         }
+
+        public void CreateStudent(Student student)
+        {
+            _context.Add(student);
+            _context.SaveChanges();
+        }
     }
 }

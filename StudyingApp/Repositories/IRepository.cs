@@ -10,6 +10,8 @@ namespace StudyingApp.Repositories
     {
         IEnumerable<Student> GetStudentsList();
         Student GetStudentById(int id);
+        void CreateStudent(Student student);
+        
 
     }
 }
