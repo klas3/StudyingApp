@@ -28,7 +28,7 @@ namespace StudyingApp.Controllers
 
         public IActionResult Privacy()
         {
-            return View();
+            return View(_repository.GetStudentsList());
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
