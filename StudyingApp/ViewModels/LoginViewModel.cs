@@ -15,5 +15,8 @@ namespace StudyingApp.ViewModels
         [Display(Name = "Пароль")]
         [Required(ErrorMessage = "Введіть ваш пароль")]
         public string Password { get; set; }
+
+        [Display(Name = "Замам'ятати мене")]
+        public bool RememberMe { get; set; }
     }
 }

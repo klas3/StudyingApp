@@ -49,5 +49,8 @@ namespace StudyingApp.ViewModels
         [Display(Name = "Вміння в галузі ІТ")]
         [Required(ErrorMessage = "Поділіться своїми вміннями")]
         public string Skills { get; set; }
+
+        [Display(Name = "Замам'ятати мене")]
+        public bool RememberMe { get; set; }
     }
 }
