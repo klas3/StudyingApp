@@ -50,7 +50,7 @@ namespace StudyingApp
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, StudiyingAppContext dbContext)
+        public async void Configure(IApplicationBuilder app, IWebHostEnvironment env, StudiyingAppContext dbContext, RoleManager<IdentityRole> roleManager)
         {
             if (env.IsDevelopment())
             {
@@ -69,6 +69,10 @@ namespace StudyingApp
             app.UseRouting();
 
             app.UseAuthorization();
+
+            await roleManager.CreateAsync(new IdentityRole("Admin"));
+            await roleManager.CreateAsync(new IdentityRole("Teacher"));
+            await roleManager.CreateAsync(new IdentityRole("Student"));
 
             app.UseEndpoints(endpoints =>
             {
