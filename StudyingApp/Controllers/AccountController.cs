@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -28,7 +29,33 @@ namespace StudyingApp.Controllers
         [HttpGet]
         public IActionResult Login()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginViewModel loginModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _signInManager.PasswordSignInAsync(loginModel.Login, loginModel.Password, loginModel.RememberMe, false);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            ModelState.AddModelError("", "Failed to Login");
+            return View();
+        }
+
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpGet]
@@ -48,7 +75,8 @@ namespace StudyingApp.Controllers
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     MiddleName = model.MiddleName,
-                    Email = model.Email
+                    Email = model.Email,
+                    UserName = model.Login
                 };
 
                 var result = await _userManager.CreateAsync(user, model.Password);
@@ -62,7 +90,8 @@ namespace StudyingApp.Controllers
                         await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Email, user.Email));
                     }
 
-                    var resultSignIn = await _signInManager.PasswordSignInAsync(model.FirstName, model.Password, true, false);
+                    var resultSignIn = await _signInManager.PasswordSignInAsync(model.Login, model.Password, model.RememberMe, false);
+                    Debug.Write(User);
                     if (resultSignIn.Succeeded)
                     {
                         return RedirectToAction("Index", "Home");
