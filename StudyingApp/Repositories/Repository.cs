@@ -29,7 +29,6 @@ namespace StudyingApp.Repositories
 
         public void CreateStudent(Student student)
         {
-            student.IsVerified = false;
             _context.Students.Add(student);
             _context.SaveChanges();
         }
@@ -37,6 +36,7 @@ namespace StudyingApp.Repositories
         public void VerifyStudent(Student student)
         {
             student.IsVerified = true;
+            _context.SaveChanges();
         }
 
         public void DeleteStudentById(int id)
@@ -46,6 +46,14 @@ namespace StudyingApp.Repositories
             _context.SaveChanges();
         }
 
+        public bool IsLoginUnique(string login)
+        {
+            if(_context.DBUsers.SingleOrDefault(user => user.UserName == login) == null)
+            {
+                return true;
+            }
 
+            return false;
+        }
     }
 }

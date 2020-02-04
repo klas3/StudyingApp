@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using StudyingApp.Models;
+using StudyingApp.Repositories;
 using StudyingApp.ViewModels;
 
 namespace StudyingApp.Controllers
@@ -17,11 +18,13 @@ namespace StudyingApp.Controllers
 
         private SignInManager<User> _signInManager;
         private UserManager<User> _userManager;
+        private IRepository _repository;
 
-        public AccountController(SignInManager<User> signInManager, UserManager<User> userManager)
+        public AccountController(SignInManager<User> signInManager, UserManager<User> userManager, IRepository repository)
         {
             _signInManager = signInManager;
             _userManager = userManager;
+            _repository = repository;
         }
 
         public IActionResult Login()
@@ -66,35 +69,53 @@ namespace StudyingApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = new User
+                if(_repository.IsLoginUnique(model.Login))
                 {
-                    FirstName = model.FirstName,
-                    LastName = model.LastName,
-                    MiddleName = model.MiddleName,
-                    Email = model.Email,
-                    UserName = model.Login
-                };
-
-                var result = await _userManager.CreateAsync(user, model.Password);
-
-                if(result.Succeeded)
-                {
-                    await _userManager.AddToRoleAsync(user, studentRoleName);
-
-                    if (!string.IsNullOrWhiteSpace(user.Email))
+                    User user = new User
                     {
-                        await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Email, user.Email));
+                        FirstName = model.FirstName,
+                        LastName = model.LastName,
+                        MiddleName = model.MiddleName,
+                        Email = model.Email,
+                        UserName = model.Login
+                    };
+
+                    var result = await _userManager.CreateAsync(user, model.Password);
+
+                    if(result.Succeeded)
+                    {
+                        Student student = new Student
+                        {
+                            UserId = user.Id,
+                            University = model.University,
+                            Faculty = model.Faculty,
+                            UniversityCourse = int.Parse(model.Course),
+                            IsVerified = false
+                        };
+
+                        _repository.CreateStudent(student);
+
+                        await _userManager.AddToRoleAsync(user, studentRoleName);
+
+                        if (!string.IsNullOrWhiteSpace(user.Email))
+                        {
+                            await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Email, user.Email));
+                        }
+                    
+                        var resultSignIn = await _signInManager.PasswordSignInAsync(model.Login, model.Password, model.RememberMe, false);
+                        if (resultSignIn.Succeeded)
+                        {
+                            return RedirectToAction("Index", "Home");
+                        }
                     }
-
-                    var resultSignIn = await _signInManager.PasswordSignInAsync(model.Login, model.Password, model.RememberMe, false);
-                    if (resultSignIn.Succeeded)
+                    foreach (var error in result.Errors)
                     {
-                        return RedirectToAction("Index", "Home");
+                        ModelState.AddModelError("", error.Description);
                     }
                 }
-                foreach (var error in result.Errors)
+                else
                 {
-                    ModelState.AddModelError("", error.Description);
+                    ModelState.AddModelError("", "Введений логін вже використовується");
                 }
             }
             return View();
