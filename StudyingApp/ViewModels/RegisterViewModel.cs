@@ -20,6 +20,10 @@ namespace StudyingApp.ViewModels
         [Required(ErrorMessage = "Введіть ваше по батькові")]
         public string MiddleName { get; set; }
 
+        [Display(Name = "Логін")]
+        [Required(ErrorMessage = "Введіть ваш логін")]
+        public string Login { get; set; }
+
         [Display(Name = "Ел. пошта")]
         [Required(ErrorMessage = "Введіть вашу електронну пошту")]
         [DataType(DataType.EmailAddress)]
@@ -41,9 +45,9 @@ namespace StudyingApp.ViewModels
         [Required(ErrorMessage = "Оберіть свій курс")]
         public string Course { get; set; }
 
+        [StringLength(200)]
         [Display(Name = "Вміння в галузі ІТ")]
         [Required(ErrorMessage = "Поділіться своїми вміннями")]
         public string Skills { get; set; }
-
     }
 }
