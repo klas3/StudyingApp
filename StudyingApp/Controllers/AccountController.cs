@@ -18,12 +18,15 @@ namespace StudyingApp.Controllers
 
         private SignInManager<User> _signInManager;
         private UserManager<User> _userManager;
+        private RoleManager<IdentityRole> _roleManager;
+
         private IRepository _repository;
 
-        public AccountController(SignInManager<User> signInManager, UserManager<User> userManager, IRepository repository)
+        public AccountController(SignInManager<User> signInManager, UserManager<User> userManager, RoleManager<IdentityRole> roleManager, IRepository repository)
         {
             _signInManager = signInManager;
             _userManager = userManager;
+            _roleManager = roleManager;
             _repository = repository;
         }
 
@@ -94,6 +97,12 @@ namespace StudyingApp.Controllers
                         };
 
                         _repository.CreateStudent(student);
+
+                        bool roleExists = await _roleManager.RoleExistsAsync(studentRoleName);
+                        if (!roleExists)
+                        {
+                            await _roleManager.CreateAsync(new IdentityRole(studentRoleName));
+                        }
 
                         await _userManager.AddToRoleAsync(user, studentRoleName);
 
