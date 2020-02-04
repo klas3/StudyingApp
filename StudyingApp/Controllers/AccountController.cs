@@ -26,10 +26,9 @@ namespace StudyingApp.Controllers
             _roleManager = roleManager;
         }
 
-        [HttpGet]
         public IActionResult Login()
         {
-            if (User.Identity.IsAuthenticated)
+            if (this.User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -37,7 +36,7 @@ namespace StudyingApp.Controllers
             return View();
         }
 
-        [HttpPost]
+        [HttpPost, ActionName("Login")]
         public async Task<IActionResult> Login(LoginViewModel loginModel)
         {
             if (ModelState.IsValid)
@@ -58,7 +57,6 @@ namespace StudyingApp.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        [HttpGet]
         public IActionResult Register()
         {
             return View();

@@ -18,12 +18,13 @@ namespace StudyingApp
 {
     public class Startup
     {
+        private IConfiguration _configuration;
+
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            _configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -38,10 +39,10 @@ namespace StudyingApp
 
             services.AddTransient<IRepository, Repository>();
 
-            services.AddControllersWithViews();
-
             services.AddDbContext<StudiyingAppContext>(options =>
                 options.UseSqlite("Data Source=study.db"));
+
+            services.AddMvc();
 
             services.AddAuthorization(options =>
             {
@@ -65,6 +66,8 @@ namespace StudyingApp
             dbContext.Database.EnsureCreated();
 
             app.UseStaticFiles();
+
+            app.UseAuthentication();
 
             app.UseRouting();
 

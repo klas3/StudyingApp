@@ -11,6 +11,7 @@ using StudyingApp.Repositories;
 
 namespace StudyingApp.Controllers
 {
+    
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -30,7 +31,7 @@ namespace StudyingApp.Controllers
         [Authorize]
         public IActionResult Privacy()
         {
-            return View(_repository.GetStudentsList());
+            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
