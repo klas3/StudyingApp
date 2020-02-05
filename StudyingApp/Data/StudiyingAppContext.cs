@@ -28,15 +28,6 @@ namespace StudyingApp.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<User>()
-                .HasOne(user => user.Course)
-                .WithOne(course => course.User)
-                .HasForeignKey<Course>(course => course.UserId);
-
-            modelBuilder.Entity<User>()
-                .HasOne(user => user.Student)
-                .WithOne(student => student.User)
-                .HasForeignKey<Student>(student => student.UserId);
         }
     }    
 }

@@ -1,0 +1,48 @@
+﻿@model IEnumerable<StudyingApp.Models.Student>
+
+@{
+    ViewData["Title"] = "Students";
+}
+
+<div class="row">
+    <div class="col-sm">
+        <h1 class="text-center m-5">Список студентів</h1>
+        <table class="table">
+            <thead class="bg-primary text-light">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.User.FirstName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.User.LastName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.University)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Faculty)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.User.FirstName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.User.LastName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.University)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Faculty)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

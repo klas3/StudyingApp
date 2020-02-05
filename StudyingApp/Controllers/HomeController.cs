@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using StudyingApp.Models;
 using StudyingApp.Repositories;
+using StudyingApp.ViewModels;
 
 namespace StudyingApp.Controllers
 {
@@ -32,6 +33,13 @@ namespace StudyingApp.Controllers
         public IActionResult Privacy()
         {
             return View();
+        }
+
+        [Authorize]
+        public IActionResult Students() 
+        {
+            IEnumerable<Student> students = _repository.GetStudentsList();
+            return View(students);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
