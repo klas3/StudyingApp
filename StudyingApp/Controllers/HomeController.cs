@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using StudyingApp.Models;
@@ -10,6 +11,7 @@ using StudyingApp.Repositories;
 
 namespace StudyingApp.Controllers
 {
+    
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -26,9 +28,10 @@ namespace StudyingApp.Controllers
             return View();
         }
 
+        [Authorize]
         public IActionResult Privacy()
         {
-            return View(_repository.GetStudentsList());
+            return View();
         }
 
         public IActionResult Courses()

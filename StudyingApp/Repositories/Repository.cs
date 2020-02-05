@@ -26,5 +26,34 @@ namespace StudyingApp.Repositories
         {
             return _context.Students.SingleOrDefault(s => s.StudentId == id);
         }
+
+        public void CreateStudent(Student student)
+        {
+            _context.Students.Add(student);
+            _context.SaveChanges();
+        }
+
+        public void VerifyStudent(Student student)
+        {
+            student.IsVerified = true;
+            _context.SaveChanges();
+        }
+
+        public void DeleteStudentById(int id)
+        {
+            var student = _context.Students.SingleOrDefault(s => s.StudentId == id);
+            _context.Students.Remove(student);
+            _context.SaveChanges();
+        }
+
+        public bool IsLoginUnique(string login)
+        {
+            if(_context.DBUsers.SingleOrDefault(user => user.UserName == login) == null)
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }
