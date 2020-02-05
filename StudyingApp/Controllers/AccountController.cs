@@ -93,6 +93,7 @@ namespace StudyingApp.Controllers
                             University = model.University,
                             Faculty = model.Faculty,
                             UniversityCourse = int.Parse(model.Course),
+                            Skills = model.Skills,
                             IsVerified = false
                         };
 

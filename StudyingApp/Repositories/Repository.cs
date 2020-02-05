@@ -19,7 +19,7 @@ namespace StudyingApp.Repositories
 
         public IEnumerable<Student> GetStudentsList()
         {
-            return _context.Students.ToList();
+            return _context.Students.Include(s => s.User).ToList();
         }
 
         public Student GetStudentById(int id)
@@ -55,5 +55,7 @@ namespace StudyingApp.Repositories
 
             return false;
         }
+
+        
     }
 }
