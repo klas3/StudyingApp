@@ -8,10 +8,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using StudyingApp.Models;
 using StudyingApp.Repositories;
+using StudyingApp.ViewModels;
 
 namespace StudyingApp.Controllers
 {
-    
+
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -34,9 +35,11 @@ namespace StudyingApp.Controllers
             return View();
         }
 
-        public IActionResult Courses()
+        [Authorize]
+        public IActionResult Students()
         {
-            return View();
+            IEnumerable<Student> students = _repository.GetStudentsList();
+            return View(students);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
