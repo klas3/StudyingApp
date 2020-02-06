@@ -15,9 +15,12 @@
                     </th>
                     @foreach (var item in Model)
                     {
-                        <th>
-                            @Html.DisplayFor(modelItem => item.Listeners)
-                        </th>
+                        @foreach (var course in item.Listeners)
+                        {
+                            <th>
+                                @Html.DisplayFor(c => course.Course.Name)
+                            </th>
+                        }
                     }
                 </tr>
             </thead>
@@ -25,7 +28,15 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-                        
+                        <th>
+                            @Html.DisplayFor(u => item.User.FirstName) @Html.DisplayFor(u => item.User.LastName)
+                        </th>
+                        @foreach (var mark in item.Listeners)
+                        {
+                            <th>
+                                @Html.DisplayFor(m => mark.TotalMark)
+                            </th>
+                        }
                     </tr>
                 }
             </tbody>
