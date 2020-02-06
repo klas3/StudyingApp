@@ -23,6 +23,8 @@ namespace StudyingApp.Models
 
         public virtual User User { get; set; }
 
+        public virtual ICollection<Mark> Marks { get; set; }
+
         public virtual ICollection<Listeners> Listeners { get; set; }
     }
 }
