@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewData["Title"] = "Rating";
+}
+
+<div class="row">
+    <div class="col-sm">
+        <h1 class="text-center m-5">Рейтинг студентів</h1>
+        <table class="table">
+            <thead class="bg-primary text-light">
+                <tr>
+                    <th>
+                        Ім'я
+                    </th>
+                    <th>
+                        Прізвище
+                    </th>
+                    <th>
+                        Університет
+                    </th>
+                    <th>
+                        Факультет
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.User.FirstName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.User.LastName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.University)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Faculty)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -11,6 +11,8 @@ namespace StudyingApp.Models
         [Key]
         public int ListenerId { get; set; }
 
+        public int TotalMark { get; set; }
+
         public int StudentId { get; set; }
         public virtual Student Student { get; set; }
 
