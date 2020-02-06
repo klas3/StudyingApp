@@ -80,5 +80,20 @@ namespace StudyingApp.Repositories
         {
             return _context.Modules.Where(module => DateTime.Compare(module.Date, DateTime.Now) > 0).Include(module => module.Course).ToList();
         }
+
+        public IEnumerable<Student> GetRatingStudents(int year, string courseId)
+        {
+            if(courseId == null)
+            {
+                return _context.Students.Include(s => s.User).Include(l => l.Listeners).ThenInclude(c => c.Course).ToList();
+            }
+            else
+            {
+                return _context.Students.Where(student => student.IsVerified == true)
+                        .Include(s => s.User).Include(l => l.Listeners).ThenInclude(c => c.Course)
+                        .ThenInclude(y => y.Year == year)
+                        .ToList();
+            }
+        }
     }
 }

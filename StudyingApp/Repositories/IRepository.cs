@@ -18,5 +18,6 @@ namespace StudyingApp.Repositories
         bool IsEmailUnique(string email);
         Course GetCourseById(int id);
         IEnumerable<Module> GetScheduleModulesList();
+        IEnumerable<Student> GetRatingStudents(int year, string courseId);
     }
 }

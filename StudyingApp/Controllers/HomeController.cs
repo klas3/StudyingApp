@@ -57,6 +57,13 @@ namespace StudyingApp.Controllers
         }
 
         [Authorize]
+        public IActionResult Rating()
+        {
+            IEnumerable<Student> students = _repository.GetRatingStudents(2020, null);
+            return View(students);
+        }
+
+        [Authorize]
         public IActionResult Course(int id)
         {
             var course = _repository.GetCourseById(id);

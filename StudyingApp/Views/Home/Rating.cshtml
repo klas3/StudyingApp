@@ -1,4 +1,5 @@
-﻿
+﻿@model IEnumerable<Student>
+
 @{
     ViewData["Title"] = "Rating";
 }
@@ -10,35 +11,21 @@
             <thead class="bg-primary text-light">
                 <tr>
                     <th>
-                        Ім'я
+                        Студент
                     </th>
-                    <th>
-                        Прізвище
-                    </th>
-                    <th>
-                        Університет
-                    </th>
-                    <th>
-                        Факультет
-                    </th>
+                    @foreach (var item in Model)
+                    {
+                        <th>
+                            @Html.DisplayFor(modelItem => item.Listeners)
+                        </th>
+                    }
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.User.FirstName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.User.LastName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.University)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Faculty)
-                        </td>
+                        
                     </tr>
                 }
             </tbody>
