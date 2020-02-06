@@ -12,34 +12,7 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
-                @*<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">StudyingApp</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div  class="collapse navbar-collapse">
-            <ul class="navbar-nav" style="font-size: 20px;">
-                <li class="nav-item">
-                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                </li>
-                @if (User.Identity.IsAuthenticated)
-                {
-                    <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("Logout", "Account")">Logout</a>
-                    </li>
-                }
-                else
-                {
-                    <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("Login", "Account")">Login</a>
-                    </li>
-                }
-            </ul>
-        </div>*@
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">StudyingApp</a>
+                <a class="navbar-brand display-5" asp-area="" asp-controller="Home" asp-action="Index">StudyingApp</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -59,11 +32,13 @@
                                 <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Rating">Рейтинг</a>
                             </li>
                         </ul>
-                        <input value="Logout" type="button" class="btn btn-info" onclick="window.location='@Url.Action("Logout", "Account")'"/>
+                        <a class="nav-link" style="cursor:pointer" onclick="window.location='@Url.Action("Logout", "Account")'">Вийти</a>
                     }
                     else
                     {
-                        <input value="Login" type="button" class="btn btn-info" onclick="window.location='@Url.Action("Login", "Account")'" style="margin: 0 0 0 auto;"/>
+                        <div class="navbar-nav justify-content-end">
+                                <a class="nav-link " style="cursor:pointer; margin-left:30%" onclick="window.location='@Url.Action("Login", "Account")'">Увійти</a>
+                        </div>
                     }
                 </div>
             </div>

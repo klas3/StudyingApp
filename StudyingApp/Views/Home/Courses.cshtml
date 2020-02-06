@@ -3,9 +3,15 @@
     ViewData["Title"] = "Courses";
     Layout = "_Layout";
 }
-<link href="~/css/Courses.css" rel="stylesheet" />
-<h1>Courses</h1>
+<h1 class="text-center m-5">Courses</h1>
 
-<div class="align-items-center m-5" id="space-between">
-    <button type="button" class="btn btn-outline-secondary btn-xl">Course</button>
+<div class="align-items-center m-5">
+    <button class="btn btn-primary btn-lg bg-primary btn-block dropdown-toggle text-left" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Course
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="#">Module1</a>
+        <a class="dropdown-item" href="#">Module3</a>
+        <a class="dropdown-item" href="#">Module4</a>
+    </div>
 </div>
