@@ -1,26 +1,26 @@
-﻿@model IEnumerable<StudyingApp.Models.Student>
+﻿@model IEnumerable<StudyingApp.Models.Module>
 
 @{
-    ViewData["Title"] = "Students";
+    ViewData["Title"] = "Schedule";
 }
 
 <div class="row">
     <div class="col-sm">
-        <h1 class="text-center m-5">Список студентів</h1>
+        <h1 class="text-center m-5">Графік занять</h1>
         <table class="table">
             <thead class="bg-primary text-light">
                 <tr>
                     <th>
-                        Ім'я
+                        Дата
                     </th>
                     <th>
-                        Прізвище
+                        Час
                     </th>
                     <th>
-                        Університет
+                        Курс
                     </th>
                     <th>
-                        Факультет
+                        Модуль
                     </th>
                 </tr>
             </thead>
@@ -29,16 +29,16 @@
                 {
                     <tr>
                         <td>
-                            @Html.DisplayFor(modelItem => item.User.FirstName)
+                            @Html.DisplayFor(modelItem => item.Date)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.User.LastName)
+                            @Html.DisplayFor(modelItem => item.Date.TimeOfDay)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.University)
+                            @Html.DisplayFor(modelItem => item.Course.Name)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Faculty)
+                            @Html.DisplayFor(modelItem => item.ModuleName)
                         </td>
                     </tr>
                 }

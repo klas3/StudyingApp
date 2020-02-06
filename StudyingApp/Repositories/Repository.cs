@@ -75,5 +75,10 @@ namespace StudyingApp.Repositories
         {
             return _context.Courses.SingleOrDefault(c => c.CourseId == id);
         }
+
+        public IEnumerable<Module> GetScheduleModulesList()
+        {
+            return _context.Modules.Where(module => DateTime.Compare(module.Date, DateTime.Now) > 0).Include(module => module.Course).ToList();
+        }
     }
 }

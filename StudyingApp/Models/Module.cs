@@ -21,6 +21,7 @@ namespace StudyingApp.Models
 
         public int CourseId { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime Date { get; set; }
 
         public virtual Course Course { get; set; }

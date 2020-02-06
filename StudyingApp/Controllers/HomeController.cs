@@ -30,6 +30,13 @@ namespace StudyingApp.Controllers
         }
 
         [Authorize]
+        public IActionResult Schedule()
+        {
+            IEnumerable<Module> modules = _repository.GetScheduleModulesList();
+            return View(modules);
+        }
+
+        [Authorize]
         public IActionResult Privacy()
         {
             return View();
@@ -42,12 +49,14 @@ namespace StudyingApp.Controllers
             return View(students);
         }
 
+        [Authorize]
         public IActionResult Courses()
         {
             IEnumerable<Course> courses = _repository.GetCoursesList();
             return View(courses);
         }
 
+        [Authorize]
         public IActionResult Course(int id)
         {
             var course = _repository.GetCourseById(id);
