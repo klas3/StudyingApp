@@ -48,6 +48,16 @@ namespace StudyingApp.Controllers
             return View(courses);
         }
 
+        public IActionResult Course(int id)
+        {
+            var course = _repository.GetCourseById(id);
+            if (course == null)
+            {
+                return NotFound();
+            }
+            return View(course);
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

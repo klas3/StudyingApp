@@ -16,5 +16,7 @@ namespace StudyingApp.Repositories
         bool IsLoginUnique(string login);
         IEnumerable<Course> GetCoursesList();
         bool IsEmailUnique(string email);
+        Course GetCourseById(int id);
+
     }
 }

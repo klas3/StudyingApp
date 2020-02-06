@@ -1,4 +1,4 @@
-﻿@model IEnumerable<StudyingApp.Models.Course> 
+﻿@model IEnumerable<StudyingApp.Models.Course>
 
 @{
     ViewData["Title"] = "Courses";
@@ -9,14 +9,10 @@
 <div class="align-items-center m-5">
     @foreach (var item in Model)
     {
-        <button class="btn btn-primary btn-lg bg-primary btn-block dropdown-toggle text-left mt-3" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            @Html.DisplayFor(modelItem => item.Name)
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            @foreach (var module in item.Modules)
-            {
-                <a class="dropdown-item" href="#">"@Html.DisplayFor(moduleItem => module.ModuleName)"</a>
-            }
-        </div>
+        <form asp-area="" asp-controller="Home" asp-action="Course" asp-route-id="@item.CourseId">
+            <button class="btn btn-primary btn-lg btn-block text-center mt-3" type="submit">
+                @Html.DisplayFor(modelItem => item.Name)
+            </button>
+        </form>
     }
 </div>

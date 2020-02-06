@@ -70,5 +70,10 @@ namespace StudyingApp.Repositories
         {
             return _context.Courses.Include(m => m.Modules).ToList();
         }
+
+        public Course GetCourseById(int id)
+        {
+            return _context.Courses.SingleOrDefault(c => c.CourseId == id);
+        }
     }
 }
