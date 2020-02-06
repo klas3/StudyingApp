@@ -73,7 +73,7 @@ namespace StudyingApp.Repositories
 
         public Course GetCourseById(int id)
         {
-            return _context.Courses.SingleOrDefault(c => c.CourseId == id);
+            return _context.Courses.Include(u => u.User).Include(m => m.Modules).ThenInclude(t => t.Tasks).SingleOrDefault(c => c.CourseId == id);
         }
 
         public IEnumerable<Module> GetScheduleModulesList()
