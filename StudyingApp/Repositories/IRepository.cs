@@ -14,6 +14,7 @@ namespace StudyingApp.Repositories
         void VerifyStudent(Student student);
         void DeleteStudentById(int id);
         bool IsLoginUnique(string login);
+        IEnumerable<Course> GetCoursesList();
 
     }
 }

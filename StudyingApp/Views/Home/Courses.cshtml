@@ -1,4 +1,5 @@
-﻿
+﻿@model IEnumerable<StudyingApp.Models.Course> 
+
 @{
     ViewData["Title"] = "Courses";
     Layout = "_Layout";
@@ -6,12 +7,16 @@
 <h1 class="text-center m-5">Courses</h1>
 
 <div class="align-items-center m-5">
-    <button class="btn btn-primary btn-lg bg-primary btn-block dropdown-toggle text-left" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Course
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="#">Module1</a>
-        <a class="dropdown-item" href="#">Module3</a>
-        <a class="dropdown-item" href="#">Module4</a>
-    </div>
+    @foreach (var item in Model)
+    {
+        <button class="btn btn-primary btn-lg bg-primary btn-block dropdown-toggle text-left mt-3" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            @Html.DisplayFor(modelItem => item.Name)
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            @foreach (var module in item.Modules)
+            {
+                <a class="dropdown-item" href="#">"@Html.DisplayFor(moduleItem => module.ModuleName)"</a>
+            }
+        </div>
+    }
 </div>

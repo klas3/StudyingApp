@@ -37,11 +37,11 @@ namespace StudyingApp
 
             services.AddTransient<IRepository, Repository>();
 
-            services.AddDbContext<StudiyingAppContext>(options =>
-                options.UseSqlite("Data Source=study.db"));
-
             //services.AddDbContext<StudiyingAppContext>(options =>
-            //     options.UseSqlServer(_configuration.GetConnectionString("DefaultConnection")));
+            //    options.UseSqlite("Data Source=study.db"));
+
+            services.AddDbContext<StudiyingAppContext>(options =>
+                 options.UseSqlServer(_configuration.GetConnectionString("DefaultConnection")));
 
             services.AddMvc();
 
@@ -62,8 +62,8 @@ namespace StudyingApp
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            dbContext.Database.EnsureDeleted();
-            dbContext.Database.EnsureCreated();
+            //dbContext.Database.EnsureDeleted();
+            //dbContext.Database.EnsureCreated();
 
             app.UseStaticFiles();
 

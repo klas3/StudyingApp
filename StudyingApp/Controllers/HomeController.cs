@@ -44,7 +44,8 @@ namespace StudyingApp.Controllers
 
         public IActionResult Courses()
         {
-            return View();
+            IEnumerable<Course> courses = _repository.GetCoursesList();
+            return View(courses);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

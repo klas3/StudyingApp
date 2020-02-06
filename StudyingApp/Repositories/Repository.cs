@@ -56,6 +56,9 @@ namespace StudyingApp.Repositories
             return false;
         }
 
-        
+        public IEnumerable<Course> GetCoursesList()
+        {
+            return _context.Courses.Include(m => m.Modules).ToList();
+        }
     }
 }
