@@ -74,53 +74,60 @@ namespace StudyingApp.Controllers
             {
                 if(_repository.IsLoginUnique(model.Login))
                 {
-                    User user = new User
+                    if(_repository.IsEmailUnique(model.Email))
                     {
-                        FirstName = model.FirstName,
-                        LastName = model.LastName,
-                        MiddleName = model.MiddleName,
-                        Email = model.Email,
-                        UserName = model.Login
-                    };
-
-                    var result = await _userManager.CreateAsync(user, model.Password);
-
-                    if(result.Succeeded)
-                    {
-                        Student student = new Student
+                        User user = new User
                         {
-                            UserId = user.Id,
-                            University = model.University,
-                            Faculty = model.Faculty,
-                            UniversityCourse = int.Parse(model.Course),
-                            Skills = model.Skills,
-                            IsVerified = false
+                            FirstName = model.FirstName,
+                            LastName = model.LastName,
+                            MiddleName = model.MiddleName,
+                            Email = model.Email,
+                            UserName = model.Login
                         };
 
-                        _repository.CreateStudent(student);
+                        var result = await _userManager.CreateAsync(user, model.Password);
 
-                        bool roleExists = await _roleManager.RoleExistsAsync(studentRoleName);
-                        if (!roleExists)
+                        if(result.Succeeded)
                         {
-                            await _roleManager.CreateAsync(new IdentityRole(studentRoleName));
-                        }
+                            Student student = new Student
+                            {
+                                UserId = user.Id,
+                                University = model.University,
+                                Faculty = model.Faculty,
+                                UniversityCourse = int.Parse(model.Course),
+                                Skills = model.Skills,
+                                IsVerified = false
+                            };
 
-                        await _userManager.AddToRoleAsync(user, studentRoleName);
+                            _repository.CreateStudent(student);
 
-                        if (!string.IsNullOrWhiteSpace(user.Email))
-                        {
-                            await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Email, user.Email));
-                        }
+                            bool roleExists = await _roleManager.RoleExistsAsync(studentRoleName);
+                            if (!roleExists)
+                            {
+                                await _roleManager.CreateAsync(new IdentityRole(studentRoleName));
+                            }
+
+                            await _userManager.AddToRoleAsync(user, studentRoleName);
+
+                            if (!string.IsNullOrWhiteSpace(user.Email))
+                            {
+                                await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Email, user.Email));
+                            }
                     
-                        var resultSignIn = await _signInManager.PasswordSignInAsync(model.Login, model.Password, model.RememberMe, false);
-                        if (resultSignIn.Succeeded)
+                            var resultSignIn = await _signInManager.PasswordSignInAsync(model.Login, model.Password, model.RememberMe, false);
+                            if (resultSignIn.Succeeded)
+                            {
+                                return RedirectToAction("Index", "Home");
+                            }
+                        }
+                        foreach (var error in result.Errors)
                         {
-                            return RedirectToAction("Index", "Home");
+                            ModelState.AddModelError("", error.Description);
                         }
                     }
-                    foreach (var error in result.Errors)
+                    else
                     {
-                        ModelState.AddModelError("", error.Description);
+                        ModelState.AddModelError("", "Введений Email вже зареєстрований іншим користувачем");
                     }
                 }
                 else

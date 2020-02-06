@@ -15,6 +15,6 @@ namespace StudyingApp.Repositories
         void DeleteStudentById(int id);
         bool IsLoginUnique(string login);
         IEnumerable<Course> GetCoursesList();
-
+        bool IsEmailUnique(string email);
     }
 }

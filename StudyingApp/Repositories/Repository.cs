@@ -48,7 +48,17 @@ namespace StudyingApp.Repositories
 
         public bool IsLoginUnique(string login)
         {
-            if(_context.DBUsers.SingleOrDefault(user => user.UserName == login) == null)
+            if (_context.DBUsers.SingleOrDefault(user => user.UserName == login) == null)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool IsEmailUnique(string email)
+        {
+            if (_context.DBUsers.SingleOrDefault(user => user.Email == email) == null)
             {
                 return true;
             }
