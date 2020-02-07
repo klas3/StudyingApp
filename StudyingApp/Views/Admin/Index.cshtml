@@ -43,8 +43,8 @@
                     @Html.DisplayFor(modelItem => item.Faculty)
                 </td>
                 <td>
-                    <form>
-                        <button type="submit" asp-controller="Admin" asp-route-id="@item.StudentId" asp-action="VerifyStudentPost">Підтвердити</button>
+                    <form asp-area="" asp-controller="Admin" asp-action="VerifyStudentPost" asp-route-id="@item.StudentId">
+                        <button class="btn" type="submit">Підтвердити</button>
                     </form>
                 </td>
             </tr>

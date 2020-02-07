@@ -41,6 +41,7 @@ namespace StudyingApp.Repositories
         public void VerifyStudent(Student student)
         {
             student.IsVerified = true;
+            _context.Students.Update(student);
             _context.SaveChanges();
         }
 
