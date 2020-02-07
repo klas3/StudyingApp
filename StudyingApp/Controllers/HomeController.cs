@@ -59,7 +59,7 @@ namespace StudyingApp.Controllers
         [Authorize]
         public IActionResult Rating()
         {
-            IEnumerable<Student> students = _repository.GetRatingStudents(2020, null);
+            IEnumerable<Student> students = _repository.GetRatingStudents(2019, 2);
             return View(students);
         }
 

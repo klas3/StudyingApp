@@ -87,18 +87,23 @@ namespace StudyingApp.Repositories
             return _context.Modules.Where(module => DateTime.Compare(module.Date, DateTime.Now) > 0).Include(module => module.Course).ToList();
         }
 
-        public IEnumerable<Student> GetRatingStudents(int year, string courseId)
+        public IEnumerable<Student> GetRatingStudents(int year, int? courseId)
         {
             if(courseId == null)
             {
-                return _context.Students.Include(s => s.User).Include(l => l.Listeners).ThenInclude(c => c.Course).ToList();
+                return _context.Students.Where(student => student.IsVerified == true).Include(l => l.Listeners).ThenInclude(c => c.Course).Select(u => new Student
+                {
+                    User = u.User,
+                    Listeners = (ICollection<Listeners>)u.Listeners.Where(l => l.Course.Year == year)
+                });
             }
             else
             {
-                return _context.Students.Where(student => student.IsVerified == true)
-                        .Include(s => s.User).Include(l => l.Listeners).ThenInclude(c => c.Course)
-                        .ThenInclude(y => y.Year == year)
-                        .ToList();
+                return _context.Students.Where(student => student.IsVerified == true).Include(l => l.Listeners).ThenInclude(c => c.Course).Select(u => new Student
+                {
+                    User = u.User,
+                    Listeners = (ICollection<Listeners>)u.Listeners.Where(l => l.Course.Year == year && l.CourseId == courseId)
+                });
             }
         }
     }

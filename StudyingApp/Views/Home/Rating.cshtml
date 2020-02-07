@@ -28,14 +28,17 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <th>
-                            @Html.DisplayFor(u => item.User.FirstName) @Html.DisplayFor(u => item.User.LastName)
-                        </th>
-                        @foreach (var mark in item.Listeners)
+                        @if(item.Listeners.Count != 0)
                         {
                             <th>
-                                @Html.DisplayFor(m => mark.TotalMark)
+                                @Html.DisplayFor(u => item.User.FirstName) @Html.DisplayFor(u => item.User.LastName)
                             </th>
+                            @foreach (var mark in item.Listeners)
+                            {
+                                <th>
+                                    @Html.DisplayFor(m => mark.TotalMark)
+                                </th>
+                            }
                         }
                     </tr>
                 }
