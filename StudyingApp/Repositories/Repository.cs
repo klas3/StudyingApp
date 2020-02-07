@@ -22,6 +22,11 @@ namespace StudyingApp.Repositories
             return _context.Students.Include(s => s.User).ToList();
         }
 
+        public IEnumerable<Student> GetUnverifiedStudents()
+        {
+            return _context.Students.Where(s => s.IsVerified == false).Include(u => u.User).ToList();
+        }
+
         public Student GetStudentById(int id)
         {
             return _context.Students.SingleOrDefault(s => s.StudentId == id);

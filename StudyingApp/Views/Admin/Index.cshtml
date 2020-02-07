@@ -1,8 +1,55 @@
-﻿
+﻿@model IEnumerable<StudyingApp.Models.Student>
+
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Admin Panel</h1>
+<h1 class="text-center m-5">Admin Panel</h1>
+<table class="table">
+    <thead class="bg-primary text-light">
+        <tr>
+            <th>
+                Ім'я
+            </th>
+            <th>
+                Прізвище
+            </th>
+            <th>
+                Університет
+            </th>
+            <th>
+                Факультет
+            </th>
+            <th>
+                Верифікація
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.University)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Faculty)
+                </td>
+                <td>
+                    <form>
+                        <button type="submit" asp-controller="Admin" asp-route-id="@item.StudentId" asp-action="VerifyStudentPost">Підтвердити</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
 

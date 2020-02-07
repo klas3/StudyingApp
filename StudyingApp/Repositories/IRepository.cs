@@ -9,6 +9,7 @@ namespace StudyingApp.Repositories
     public interface IRepository
     {
         IEnumerable<Student> GetStudentsList();
+        IEnumerable<Student> GetUnverifiedStudents();
         Student GetStudentById(int id);
         void CreateStudent(Student student);
         void VerifyStudent(Student student);
@@ -19,5 +20,6 @@ namespace StudyingApp.Repositories
         Course GetCourseById(int id);
         IEnumerable<Module> GetScheduleModulesList();
         IEnumerable<Student> GetRatingStudents(int year, string courseId);
+        
     }
 }
