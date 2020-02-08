@@ -26,6 +26,14 @@ width:80% !important;
     text-align:left !important;
 }
 
+.taskType {
+font-weight:bold;
+}
+
+.rightButton {
+float:right;
+}
+
 .myButton80 {
     width: 50% !important;
 }
