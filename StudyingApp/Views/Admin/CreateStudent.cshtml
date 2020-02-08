@@ -1,0 +1,86 @@
+﻿
+@{
+    ViewData["Title"] = "CreateStudent";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model StudyingApp.ViewModels.RegisterViewModel
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Register</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/authorization.css" />
+</head>
+<body>
+    <div class="text-center">
+        <h1 class="display-4">Створити студента</h1>
+    </div>
+    <form class="loginForm" method="post" enctype="multipart/form-data" asp-controller="Admin" asp-action="CreateStudent">
+        <div asp-validation-summary="ModelOnly"></div>
+        <div class="form-group">
+            <label asp-for="LastName"></label>
+            <input asp-for="LastName" type="text" class="form-control col-xs-4">
+            <span asp-validation-for="LastName"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="FirstName"></label>
+            <input asp-for="FirstName" type="text" class="form-control col-xs-4">
+            <span asp-validation-for="FirstName"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="MiddleName"></label>
+            <input asp-for="MiddleName" type="text" class="form-control col-xs-4">
+            <span asp-validation-for="MiddleName"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Login"></label>
+            <input asp-for="Login" type="text" class="form-control col-xs-4">
+            <span asp-validation-for="Login"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Email"></label>
+            <input asp-for="Email" type="email" class="form-control col-xs-4">
+            <span asp-validation-for="Email"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Password"></label>
+            <input asp-for="Password" type="password" class="form-control">
+            <span asp-validation-for="Password"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="University"></label>
+            <input asp-for="University" type="text" class="form-control col-xs-4">
+            <span asp-validation-for="University"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Faculty"></label>
+            <input asp-for="Faculty" type="text" class="form-control col-xs-4">
+            <span asp-validation-for="Faculty"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Course"></label>
+            <select asp-for="Course" class="form-control">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </select>
+            <span asp-validation-for="Course"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Skills"></label>
+            <textarea asp-for="Skills" wrap="hard" class="form-control"></textarea>
+            <span asp-validation-for="Skills"></span>
+        </div>
+        <button type="submit" class="btn btn-success">
+            Створити
+        </button>
+    </form>
+</body>
+</html>

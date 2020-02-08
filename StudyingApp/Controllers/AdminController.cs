@@ -73,12 +73,13 @@ namespace StudyingApp.Controllers
             }
         }
 
+        [HttpGet]
         public IActionResult CreateStudent()
         {
             return View();
         }
 
-        [HttpPost]
+        [HttpPost, ActionName("CreateStudent")]
         public async Task<IActionResult> CreateStudentPost(RegisterViewModel model)
         {
             if (ModelState.IsValid)

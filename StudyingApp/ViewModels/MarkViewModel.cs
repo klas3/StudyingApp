@@ -1,22 +1,20 @@
-﻿using System;
+﻿using StudyingApp.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using StudyingApp.Models;
 
 namespace StudyingApp.ViewModels
 {
-    public class CourseViewModel
+    public class MarkViewModel
     {
         [Display(Name = "Модуль")]
         [Required(ErrorMessage = "Оберіть модуль")]
-        public virtual ICollection<Module> Modules { get; set; }
+        public virtual Module Module { get; set; }
        
 
         [Display(Name = "Студент")]
         [Required(ErrorMessage = "Оберіть студента")]
-        public virtual ICollection<Listeners> Listeners { get; set; }
+        public virtual Listeners Listener { get; set; }
 
 
         [Display(Name = "Оцінка за лабораторну")]
