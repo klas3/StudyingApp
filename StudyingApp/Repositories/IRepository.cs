@@ -19,7 +19,8 @@ namespace StudyingApp.Repositories
         bool IsEmailUnique(string email);
         Course GetCourseById(int id);
         void CreateModule(Module module);
+        void SaveChanges();
         IEnumerable<Module> GetScheduleModulesList();
-        IEnumerable<Student> GetRatingStudents(int year, int? courseId);
+        IEnumerable<Student> GetRatingStudents(int? year, int? courseId, int? studentId);
     }
 }

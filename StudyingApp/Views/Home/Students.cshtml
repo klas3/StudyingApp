@@ -55,9 +55,7 @@
                             </form>
                         </td>
                         <td>
-                            <form asp-area="" asp-controller="Admin" asp-action="BlockStudentPost" asp-route-id="@item.StudentId">
-                                <button class="btn bg-warning text-white" type="submit">Редагувати</button>
-                            </form>
+                            <a class="btn bg-primary" asp-controller="Admin" asp-action="EditStudent" asp-route-id="@item.StudentId">Редагувати</a>
                         </td>
                     </tr>
                 }

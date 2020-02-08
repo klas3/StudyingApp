@@ -74,6 +74,38 @@ namespace StudyingApp.Controllers
         }
 
         [HttpGet]
+        public IActionResult EditStudent(int id)
+        {
+            Student student = _repository.GetStudentById(id);
+            if (student == null)
+            {
+                return NotFound();
+            }
+            return View(student);
+        }
+
+        [HttpPost, ActionName("EditStudent")]
+        public async Task<IActionResult> EditStudentPost(int id)
+        {
+            var studentToUpdate = _repository.GetStudentById(id);
+            bool isUpdatedStudent = await TryUpdateModelAsync<Student>(
+                studentToUpdate,
+                "",
+                s => s.University,
+                s => s.Faculty,
+                s => s.UniversityCourse,
+                s => s.Skills
+                );
+            if (isUpdatedStudent == true)
+            {
+                _repository.SaveChanges();
+                return RedirectToAction("Students", "Home");
+            }
+
+            return View(studentToUpdate);
+        }
+
+        [HttpGet]
         public IActionResult CreateStudent()
         {
             return View();

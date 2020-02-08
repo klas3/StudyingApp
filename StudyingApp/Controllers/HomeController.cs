@@ -55,11 +55,57 @@ namespace StudyingApp.Controllers
             return View(courses);
         }
 
-        [Authorize]
+        [HttpGet]
         public IActionResult Rating()
         {
-            IEnumerable<Student> students = _repository.GetRatingStudents(2019, 2);
-            return View(students);
+            IEnumerable<Student> students = _repository.GetRatingStudents(DateTime.Now.Year, 0, 0);
+
+            List<int> years = new List<int>();
+            List<Course> courses = new List<Course>();
+
+            foreach (Student student in students)
+            {
+                foreach (Listeners listener in student.Listeners)
+                {
+                    if (!years.Contains(listener.Course.Year))
+                    {
+                        years.Add(listener.Course.Year);
+                    }
+
+                    if (!courses.Contains(listener.Course))
+                    {
+                        courses.Add(listener.Course);
+                    }
+                }
+            }
+
+            RatingViewModel model = new RatingViewModel
+            {
+                Students = students,
+                Years = years,
+                Courses = courses
+            };
+
+            return View(model);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public IActionResult Rating(RatingViewModel viewModel)
+        {
+            IEnumerable<Student> students = _repository.GetRatingStudents(viewModel.Year, viewModel.CourseId, viewModel.StudentId);
+
+            if (viewModel.Year != 0)
+            {
+                viewModel.Year = DateTime.Now.Year;
+                return View(CreateRatingModel(viewModel, students));
+            }
+            else
+            {
+                viewModel.Year = DateTime.Now.Year;
+                ModelState.AddModelError("", "Оберіть рік перегляду!");
+                return View(CreateRatingModel(viewModel, students));
+            }
         }
 
         public IActionResult Course(int id)
@@ -72,28 +118,45 @@ namespace StudyingApp.Controllers
             return View(course);
         }
 
-        [HttpGet]
-        public IActionResult AddMark()
-        {
-            return View();
-        }
-
-        //[HttpPost]
-        //public async Task<IActionResult> AddMark(MarkViewModel model)
+        //[HttpGet]
+        //public IActionResult AddMark()
         //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        Mark mark = new Mark
-        //        {
-                    
-        //        }
-        //    }
+        //    return View();
         //}
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public RatingViewModel CreateRatingModel(RatingViewModel viewModel, IEnumerable<Student> students)
+        {
+            List<int> years = new List<int>();
+            List<Course> courses = new List<Course>();
+
+            foreach (Student student in students)
+            {
+                foreach (Listeners listener in student.Listeners)
+                {
+                    if (!years.Contains(listener.Course.Year))
+                    {
+                        years.Add(listener.Course.Year);
+                    }
+
+                    if (!courses.Contains(listener.Course))
+                    {
+                        courses.Add(listener.Course);
+                    }
+                }
+            }
+
+            return new RatingViewModel
+            {
+                Students = students,
+                Years = years,
+                Courses = courses
+            };
         }
     }
 }

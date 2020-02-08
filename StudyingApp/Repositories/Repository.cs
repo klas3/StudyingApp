@@ -24,7 +24,7 @@ namespace StudyingApp.Repositories
 
         public Student GetStudentById(int id)
         {
-            return _context.Students.SingleOrDefault(s => s.StudentId == id);
+            return _context.Students.Include(u => u.User).SingleOrDefault(s => s.StudentId == id);
         }
 
         public void CreateStudent(Student student)
@@ -89,14 +89,33 @@ namespace StudyingApp.Repositories
             return _context.Modules.Where(module => DateTime.Compare(module.Date, DateTime.Now) > 0).Include(module => module.Course).ToList();
         }
 
-        public IEnumerable<Student> GetRatingStudents(int year, int? courseId)
+        public IEnumerable<Student> GetRatingStudents(int? year, int? courseId, int? studentId)
         {
-            if(courseId == null)
+            if(courseId != 0 && studentId == 0)
             {
                 return _context.Students.Where(student => student.IsVerified == true).Include(l => l.Listeners).ThenInclude(c => c.Course).Select(u => new Student
                 {
                     User = u.User,
-                    Listeners = (ICollection<Listeners>)u.Listeners.Where(l => l.Course.Year == year)
+                    Listeners = (ICollection<Listeners>)u.Listeners.Where(l => l.Course.Year == year && l.CourseId == courseId),
+                    StudentId = u.StudentId
+                });
+            }
+            else if(courseId != 0 && studentId != 0)
+            {
+                return _context.Students.Where(student => student.IsVerified == true && student.StudentId == studentId).Include(l => l.Listeners).ThenInclude(c => c.Course).Select(u => new Student
+                {
+                    User = u.User,
+                    Listeners = (ICollection<Listeners>)u.Listeners.Where(l => l.Course.Year == year && l.CourseId == courseId),
+                    StudentId = u.StudentId
+                });
+            }
+            else if(studentId != 0 && courseId == 0)
+            {
+                return _context.Students.Where(student => student.IsVerified == true && student.StudentId == studentId).Include(l => l.Listeners).ThenInclude(c => c.Course).Select(u => new Student
+                {
+                    User = u.User,
+                    Listeners = (ICollection<Listeners>)u.Listeners.Where(l => l.Course.Year == year),
+                    StudentId = u.StudentId
                 });
             }
             else
@@ -104,7 +123,8 @@ namespace StudyingApp.Repositories
                 return _context.Students.Where(student => student.IsVerified == true).Include(l => l.Listeners).ThenInclude(c => c.Course).Select(u => new Student
                 {
                     User = u.User,
-                    Listeners = (ICollection<Listeners>)u.Listeners.Where(l => l.Course.Year == year && l.CourseId == courseId)
+                    Listeners = (ICollection<Listeners>)u.Listeners.Where(l => l.Course.Year == year),
+                    StudentId = u.StudentId
                 });
             }
         }
@@ -124,6 +144,11 @@ namespace StudyingApp.Repositories
         public void CreateMark(Mark mark)
         {
             _context.Marks.Add(mark);
+            _context.SaveChanges();
+        }
+
+        public void SaveChanges()
+        {
             _context.SaveChanges();
         }
     }
