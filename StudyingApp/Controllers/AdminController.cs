@@ -6,13 +6,17 @@ using StudyingApp.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace StudyingApp.Controllers
 {
+    [Authorize (Roles = "Admin")]
     public class AdminController : Controller
     {
         private const string studentRoleName = "Student";
         private const string teacherRoleName = "Teacher";
+        private const string unverifiedRoleName = "Unverified";
+        private const string adminRoleName = "Admin";
 
         private SignInManager<User> _signInManager;
         private UserManager<User> _userManager;
@@ -34,36 +38,24 @@ namespace StudyingApp.Controllers
             return View(students);
         }
 
-        public IActionResult VerifyStudent()
+        public async Task<IActionResult> VerifyStudent(int id)
         {
-            return View();
+            _repository.VerifyStudent(_repository.GetStudentById(id));
+            User user = (User)_repository.GetStudentById(id).User;
+            await _userManager.AddToRoleAsync(user, studentRoleName);
+            await _userManager.RemoveFromRoleAsync(user, unverifiedRoleName);
+            return RedirectToAction("Students", "Home");
         }
 
-        [HttpPost]
-        public IActionResult VerifyStudentPost(int id)
+        public async Task<IActionResult> BlockStudent(int id)
         {
-            var student = _repository.GetStudentById(id);
+            User user = _repository.GetStudentById(id).User;
 
-            if(student != null)
+            if (user != null)
             {
-                _repository.VerifyStudent(student);
-
-                return RedirectToAction(nameof(Index));
-            }
-            else
-            {
-                return View();
-            }
-        }
-
-        [HttpPost]
-        public IActionResult BlockStudentPost(int id)
-        {
-            var student = _repository.GetStudentById(id);
-
-            if (student != null)
-            {
-                _repository.BlockStudent(student);
+                _repository.BlockStudent(_repository.GetStudentById(id));
+                await _userManager.AddToRoleAsync(user, unverifiedRoleName);
+                await _userManager.RemoveFromRoleAsync(user, studentRoleName);
 
                 return RedirectToAction(nameof(Index));
             }

@@ -34,30 +34,33 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model)
+                @if (Model != null)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.User.FirstName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.User.LastName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.University)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Faculty)
-                        </td>
-                        <td>
-                            <form asp-area="" asp-controller="Admin" asp-action="BlockStudentPost" asp-route-id="@item.StudentId">
-                                <button class="btn bg-danger text-white" type="submit">Заблокувати</button>
-                            </form>
-                        </td>
-                        <td>
-                            <a class="btn bg-primary" asp-controller="Admin" asp-action="EditStudent" asp-route-id="@item.StudentId">Редагувати</a>
-                        </td>
-                    </tr>
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.User.FirstName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.User.LastName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.University)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Faculty)
+                            </td>
+                            <td>
+                                <form asp-area="" asp-controller="Admin" asp-action="BlockStudent" asp-route-id="@item.StudentId">
+                                    <button class="btn bg-danger text-white" type="submit">Заблокувати</button>
+                                </form>
+                            </td>
+                            <td>
+                                <a class="btn bg-primary" asp-controller="Admin" asp-action="EditStudent" asp-route-id="@item.StudentId">Редагувати</a>
+                            </td>
+                        </tr>
+                    }
                 }
             </tbody>
         </table>

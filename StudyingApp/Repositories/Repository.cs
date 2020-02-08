@@ -33,6 +33,12 @@ namespace StudyingApp.Repositories
             _context.SaveChanges();
         }
 
+        public void CreateUser(User user)
+        {
+            _context.Users.Add(user);
+            _context.SaveChanges();
+        }
+
         public void VerifyStudent(Student student)
         {
             student.IsVerified = true;

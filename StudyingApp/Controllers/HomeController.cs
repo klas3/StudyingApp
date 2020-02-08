@@ -12,6 +12,7 @@ using StudyingApp.ViewModels;
 
 namespace StudyingApp.Controllers
 {
+    [Authorize (Roles = "Student")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

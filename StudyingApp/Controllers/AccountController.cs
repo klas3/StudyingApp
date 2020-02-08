@@ -14,7 +14,8 @@ namespace StudyingApp.Controllers
 {
     public class AccountController : Controller
     {
-        private const string studentRoleName = "Student";
+        private const string unverifiedRoleName = "Unverified";
+
 
         private SignInManager<User> _signInManager;
         private UserManager<User> _userManager;
@@ -101,13 +102,13 @@ namespace StudyingApp.Controllers
 
                             _repository.CreateStudent(student);
 
-                            bool roleExists = await _roleManager.RoleExistsAsync(studentRoleName);
+                            bool roleExists = await _roleManager.RoleExistsAsync(unverifiedRoleName);
                             if (!roleExists)
                             {
-                                await _roleManager.CreateAsync(new IdentityRole(studentRoleName));
+                                await _roleManager.CreateAsync(new IdentityRole(unverifiedRoleName));
                             }
 
-                            await _userManager.AddToRoleAsync(user, studentRoleName);
+                            await _userManager.AddToRoleAsync(user, unverifiedRoleName);
 
                             if (!string.IsNullOrWhiteSpace(user.Email))
                             {

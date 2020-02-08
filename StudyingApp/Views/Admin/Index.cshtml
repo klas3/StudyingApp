@@ -27,28 +27,32 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @if (Model != null)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.User.FirstName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.User.LastName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.University)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Faculty)
-                </td>
-                <td>
-                    <form asp-area="" asp-controller="Admin" asp-action="VerifyStudentPost" asp-route-id="@item.StudentId">
-                        <button class="btn bg-primary text-white" type="submit">Підтвердити</button>
-                    </form>
-                </td>
-            </tr>
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.User.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.User.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.University)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Faculty)
+                    </td>
+                    <td>
+                        <form asp-area="" asp-controller="Admin" asp-action="VerifyStudent" asp-route-id="@item.StudentId">
+                            <button class="btn bg-primary text-white" type="submit">Підтвердити</button>
+                        </form>
+                    </td>
+                </tr>
+            }
         }
+
     </tbody>
 </table>
 
