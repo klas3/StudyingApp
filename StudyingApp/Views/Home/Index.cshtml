@@ -2,7 +2,25 @@
     ViewData["Title"] = "Home Page";
 }
 
+
+@if (User.IsInRole("Teacher") || User.IsInRole("Administrator") || User.IsInRole("Student"))
+{
+    <div class="text-center">
+        <h1 class="display-4">Вітаємо в системі</h1>
+    </div>
+    <div class="mt-5" id="tlkio" data-channel="StudyingAppTeam3" style="width:100%;height:400px;"></div>
+}
+else if (User.IsInRole("NotVerified"))
+{
+    <div class="text-center">
+        <h1 class="display-4">Вітаємо</h1>
+        <p>Ваша заявка ще не підтверджена. Очікуйте підтверження адміністратором</p>
+    </div>
+}
+else
+{
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Вітаємо</h1>
+    <p>Для продовження роботи - зареєструйтесь</p>
 </div>
+}

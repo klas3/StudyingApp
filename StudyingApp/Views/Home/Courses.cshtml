@@ -18,7 +18,7 @@
     @if (User.IsInRole("Teacher") || User.IsInRole("Administrator"))
     {
 
-        <button type="button" class="btn btn-info mt-3" onclick="location.href='@Url.Action("Register", "Account")'">
+        <button type="button" class="btn btn-info mt-3" onclick="location.href='@Url.Action("AddCourse", "Home")'">
             Додати курс
         </button>
     }

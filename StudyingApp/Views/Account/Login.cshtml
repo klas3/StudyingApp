@@ -16,26 +16,49 @@
     </div>
     <form class="loginForm" method="post" enctype="multipart/form-data" asp-action="Login">
         <div asp-validation-summary="ModelOnly"></div>
-            <div class="form-group">
-                <label asp-for="Login"></label>
-                <input asp-for="Login" type="text" class="form-control col-xs-4">
-                <span asp-validation-for="Login"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Password"></label>
-                <input asp-for="Password" type="password" class="form-control">
-                <span asp-validation-for="Password"></span>
-            </div>
-            <div class="form-check">
-                <input asp-for="RememberMe" type="checkbox" class="form-check-input">
-                <label asp-for="RememberMe" class="form-check-label"></label>
-            </div>
-            <button type="submit" class="btn btn-success">
-                Login
-            </button>
-            <button type="button" class="btn btn-info" onclick="location.href='@Url.Action("Register", "Account")'">
-                Register
-            </button>
+        <div class="form-group">
+            <label asp-for="Login"></label>
+            <input asp-for="Login" type="text" class="form-control col-xs-4">
+            <span asp-validation-for="Login"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Password"></label>
+            <input asp-for="Password" type="password" class="form-control">
+            <span asp-validation-for="Password"></span>
+        </div>
+        <div class="form-check mt-3">
+            <input asp-for="RememberMe" type="checkbox" class="form-check-input">
+            <label asp-for="RememberMe" class="form-check-label"></label>
+        </div>
+        <button type="submit" class="btn btn-success mt-4">
+            Login
+        </button>
+        <button type="button" class="btn btn-info mt-4" onclick="location.href='@Url.Action("Register", "Account")'">
+            Register
+        </button>
+        <div class="text-center social-btn form-group">
+            <a href="#" class="btn btn-primary btn-block mt-4"><i class="fa fa-facebook"></i> Sign in with <b>Facebook</b></a>
+            <a href="#" class="btn btn-danger btn-block mt-4"><i class="fa fa-google"></i> Sign in with <b>Google</b></a>
+        </div>
+        <div class="g-signin2" data-onsuccess="onSignIn"></div>
     </form>
+    <script>
+        function onSignIn(googleUser) {
+            // Useful data for your client-side scripts:
+            var profile = googleUser.getBasicProfile();
+            console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+            console.log('Full Name: ' + profile.getName());
+            console.log('Given Name: ' + profile.getGivenName());
+            console.log('Family Name: ' + profile.getFamilyName());
+            console.log("Image URL: " + profile.getImageUrl());
+            console.log("Email: " + profile.getEmail());
+
+            // The ID token you need to pass to your backend:
+            var id_token = googleUser.getAuthResponse().id_token;
+            console.log("ID Token: " + id_token);
+        }
+    </script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
 </body>
+
 </html>
