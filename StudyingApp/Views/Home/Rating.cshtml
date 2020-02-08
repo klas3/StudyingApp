@@ -8,37 +8,40 @@
     <div class="col-sm">
         <h1 class="text-center m-5">Рейтинг студентів</h1>
 
-        <form class="loginForm" method="post" enctype="multipart/form-data" asp-action="Register">
-            <select class="browser-default custom-select" id="year" asp-for="Year">
-                <option selected>Рік</option>
+        <form class="ratingForm" method="post" enctype="multipart/form-data" asp-action="Register">
+            <div>
+                <select class="browser-default custom-select ratingSelect" id="year" asp-for="Year">
+                    <option selected>Рік</option>
 
-                @foreach (var year in Model.Years)
-                {
-                    <option value="@year">@year</option>
-                }
-            </select>
+                    @foreach (var year in Model.Years)
+                    {
+                        <option value="@year">@year</option>
+                    }
+                </select>
 
-            <select class="browser-default custom-select" id="course" asp-for="CourseId">
-                <option selected>Курс</option>
+                <select class="browser-default custom-select ratingSelect" id="course" asp-for="CourseId">
+                    <option selected>Курс</option>
 
-                @foreach (var course in Model.Courses)
-                {
-                    <option value="@course.CourseId">@course.Name</option>
-                }
-            </select>
+                    @foreach (var course in Model.Courses)
+                    {
+                        <option value="@course.CourseId">@course.Name</option>
+                    }
+                </select>
 
-            <select class="browser-default custom-select" id="student" asp-for="StudentId">
-                <option selected>Студент</option>
-                @foreach (var student in Model.Students)
-                {
-                    <option value="@student.StudentId">@student.User.FirstName @student.User.LastName</option>
-                }
-            </select>
+                <select class="browser-default custom-select ratingSelect" id="student" asp-for="StudentId">
+                    <option selected>Студент</option>
+                    @foreach (var student in Model.Students)
+                    {
+                        <option value="@student.StudentId">@student.User.FirstName @student.User.LastName</option>
+                    }
+                </select>
+                </div>
+            <div>
+                <button type="submit" class="btn btn-primary mt-3" asp-controller="Home" asp-action="Rating">Оновити</button>
+                </div>
+</form>
 
-            <button type="submit" class="btn btn-primary" asp-controller="Home" asp-action="Rating">Оновити</button>
-        </form>
-
-        <table class="table">
+        <table class="table  mt-3">
             <thead class="bg-primary text-light">
                 <tr>
                     <th>

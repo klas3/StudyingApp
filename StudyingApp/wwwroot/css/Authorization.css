@@ -6,6 +6,18 @@
     margin-right:auto;
 }
 
+.ratingForm {
+    min-width: 50px;
+    max-width: 800px;
+    width: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+.ratingSelect {
+    width: 25% !important;
+    padding-right: 50px;
+}
+
 div.validation-summary-errors * {
     color: red !important;
 }
