@@ -23,11 +23,11 @@ namespace StudyingApp.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<Student> students = _repository.GetUnverifiedStudents();
+            IEnumerable<Student> students = _repository.GetStudentsList(false);
             return View(students);
         }
 
-        public IActionResult VerifyStudent()
+        public IActionResult VerifyStudentFail()
         {
             return View();
         }
@@ -46,6 +46,22 @@ namespace StudyingApp.Controllers
             else
             {
                 return View();
+            }
+        }
+
+        public IActionResult BlockStudentPost(int id)
+        {
+            var student = _repository.GetStudentById(id);
+
+            if (student != null)
+            {
+                _repository.BlockStudent(student);
+
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                return RedirectToAction(nameof(Index));
             }
         }
     }

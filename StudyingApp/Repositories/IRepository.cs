@@ -8,11 +8,11 @@ namespace StudyingApp.Repositories
 {
     public interface IRepository
     {
-        IEnumerable<Student> GetStudentsList();
-        IEnumerable<Student> GetUnverifiedStudents();
+        IEnumerable<Student> GetStudentsList(bool isVerified);
         Student GetStudentById(int id);
         void CreateStudent(Student student);
         void VerifyStudent(Student student);
+        void BlockStudent(Student student);
         void DeleteStudentById(int id);
         bool IsLoginUnique(string login);
         IEnumerable<Course> GetCoursesList();

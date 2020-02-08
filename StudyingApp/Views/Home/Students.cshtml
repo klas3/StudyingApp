@@ -22,6 +22,9 @@
                     <th>
                         Факультет
                     </th>
+                    <th>
+                        Заблокувати
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -39,6 +42,11 @@
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Faculty)
+                        </td>
+                        <td>
+                            <form asp-area="" asp-controller="Admin" asp-action="BlockStudentPost" asp-route-id="@item.StudentId">
+                                <button class="btn bg-primary text-white" type="submit">Заблокувати</button>
+                            </form>
                         </td>
                     </tr>
                 }

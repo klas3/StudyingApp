@@ -44,7 +44,7 @@ namespace StudyingApp.Controllers
         [Authorize]
         public IActionResult Students()
         {
-            IEnumerable<Student> students = _repository.GetStudentsList();
+            IEnumerable<Student> students = _repository.GetStudentsList(true);
             return View(students);
         }
 

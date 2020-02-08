@@ -17,14 +17,9 @@ namespace StudyingApp.Repositories
             _context = context;
         }
 
-        public IEnumerable<Student> GetStudentsList()
+        public IEnumerable<Student> GetStudentsList(bool isVerified)
         {
-            return _context.Students.Include(s => s.User).ToList();
-        }
-
-        public IEnumerable<Student> GetUnverifiedStudents()
-        {
-            return _context.Students.Where(s => s.IsVerified == false).Include(u => u.User).ToList();
+            return _context.Students.Where(s => s.IsVerified == isVerified).Include(u => u.User).ToList();
         }
 
         public Student GetStudentById(int id)
@@ -41,6 +36,13 @@ namespace StudyingApp.Repositories
         public void VerifyStudent(Student student)
         {
             student.IsVerified = true;
+            _context.Students.Update(student);
+            _context.SaveChanges();
+        }
+
+        public void BlockStudent(Student student)
+        {
+            student.IsVerified = false;
             _context.Students.Update(student);
             _context.SaveChanges();
         }
