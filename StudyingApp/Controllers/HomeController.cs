@@ -12,7 +12,6 @@ using StudyingApp.ViewModels;
 
 namespace StudyingApp.Controllers
 {
-
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -26,7 +25,7 @@ namespace StudyingApp.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("Login", "Account");
         }
 
         [Authorize]

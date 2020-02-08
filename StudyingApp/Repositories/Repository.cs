@@ -106,5 +106,23 @@ namespace StudyingApp.Repositories
                 });
             }
         }
+
+        public void CreateCourse(Course course)
+        {
+            _context.Courses.Add(course);
+            _context.SaveChanges();
+        }
+
+        public void CreateModule(Module module)
+        {
+            _context.Modules.Add(module);
+            _context.SaveChanges();
+        }
+
+        public void CreateMark(Mark mark)
+        {
+            _context.Marks.Add(mark);
+            _context.SaveChanges();
+        }
     }
 }
