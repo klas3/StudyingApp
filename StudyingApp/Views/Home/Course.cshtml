@@ -49,11 +49,13 @@
             i++;
         }
     </div>
-    @if (User.IsInRole("Teacher") || User.IsInRole("Administrator"))
+    @if (User.IsInRole("Student") || User.IsInRole("Administrator"))
     {
-        <button type="button" class="btn btn-info" onclick="location.href='@Url.Action("AddModule", "Home")'">
-            Додати модуль
-        </button>
+        <form method="get" enctype="multipart/form-data" asp-action="AddModule" asp-controller="Home" asp-route-courseId="@Model.CourseId">
+            <button type="submit" class="btn btn-info">
+                Додати модуль
+            </button>
+        </form>
     }
 </div>
 

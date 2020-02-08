@@ -23,5 +23,6 @@ namespace StudyingApp.Repositories
         void SaveChanges();
         IEnumerable<Module> GetScheduleModulesList();
         IEnumerable<Student> GetRatingStudents(int? year, int? courseId, int? studentId);
+        void CreateCourse(Course course);
     }
 }

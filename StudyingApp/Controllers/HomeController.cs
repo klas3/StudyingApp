@@ -103,7 +103,6 @@ namespace StudyingApp.Controllers
             }
             else
             {
-                viewModel.Year = DateTime.Now.Year;
                 ModelState.AddModelError("", "Оберіть рік перегляду!");
                 return View(CreateRatingModel(viewModel, students));
             }
@@ -119,11 +118,75 @@ namespace StudyingApp.Controllers
             return View(course);
         }
 
-        //[HttpGet]
-        //public IActionResult AddMark()
-        //{
-        //    return View();
-        //}
+        [HttpGet]
+        public IActionResult AddCourse()
+        {
+            return View();
+        }
+       
+        [HttpPost]
+        public IActionResult AddCourse(AddCourseViewModel model)
+        {
+            if(ModelState.IsValid)
+            {
+                if(DateTime.Compare(model.StartDate, model.EndDate) < 0) 
+                {
+                    Course course = new Course
+                    {
+                        Name = model.Name,
+                        Year = model.Year,
+                        StartDate = model.StartDate,
+                        EndDate = model.EndDate
+                    };
+
+                    _repository.CreateCourse(course);
+
+                    return RedirectToAction("Courses");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Дата початку має бути раніше за дату кінця");
+                    return View();
+                }
+            }
+
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult AddModule(int courseId)
+        {
+            ViewBag.CourseId = courseId;
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddModule(ModuleViewModel model, int courseId)
+        {
+            if (ModelState.IsValid)
+            {
+                Module module = new Module
+                {
+                    ModuleName = model.ModuleName,
+                    IsTest = model.IsTest,
+                    IsLab = model.IsLab,
+                    Date = model.Date,
+                    CourseId = courseId
+                };
+
+                _repository.CreateModule(module);
+
+                return RedirectToAction("Courses");
+            }
+
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult AddMark()
+        {
+            return View();
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

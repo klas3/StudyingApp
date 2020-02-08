@@ -5,7 +5,7 @@
 
 <h1>AddModule</h1>
 
-<form class="loginForm" method="post" enctype="multipart/form-data" asp-action="">
+<form class="loginForm" method="post" enctype="multipart/form-data" asp-action="AddModule">
     <div asp-validation-summary="ModelOnly"></div>
     <div class="form-group">
         <label asp-for="ModuleName"></label>
@@ -29,7 +29,7 @@
         <span asp-validation-for="Date"></span>
     </div>
     <button type="button" class="btn btn-secondary" data-dismiss="modal">Скасувати</button>
-    <button type="submit" class="btn btn-success">
+    <button type="submit" class="btn btn-success" asp-route-courseId="@ViewBag.CourseId">
         Зберегти
     </button>
 </form>

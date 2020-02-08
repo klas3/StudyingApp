@@ -9,12 +9,12 @@ namespace StudyingApp.ViewModels
     {
         [Display(Name = "Модуль")]
         [Required(ErrorMessage = "Оберіть модуль")]
-        public virtual Module Module { get; set; }
+        public virtual Module Modules { get; set; }
        
 
         [Display(Name = "Студент")]
         [Required(ErrorMessage = "Оберіть студента")]
-        public virtual Listeners Listener { get; set; }
+        public virtual Listeners Listeners { get; set; }
 
 
         [Display(Name = "Оцінка за лабораторну")]
