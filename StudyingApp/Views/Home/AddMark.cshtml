@@ -27,6 +27,14 @@
         </select>
         <span asp-validation-for="Listeners"></span>
     </div>
+    <div class="form-group">
+        <label>Тип завдання</label>
+        <select class="form-control">
+            <option >Тест</option>
+            <option>Лабораторна</option>
+        </select>
+        <span asp-validation-for="Listeners"></span>
+    </div>
 
     <div class="form-group">
         <label asp-for="LabMark"></label>
@@ -38,10 +46,10 @@
         <input asp-for="TestMark" type="text" class="form-control col-xs-4">
         <span asp-validation-for="TestMark"></span>
     </div>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Скасувати</button>
-        <button type="submit" class="btn btn-success">
-            Зберегти
-        </button>
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Скасувати</button>
+    <button type="submit" class="btn btn-success">
+        Зберегти
+    </button>
 </form>
 
 
