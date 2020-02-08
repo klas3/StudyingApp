@@ -22,12 +22,21 @@
 width:80% !important;
 }
 
+.myButton100 {
+    width: 100% !important;
+}
+
 .btnTextLeft {
     text-align:left !important;
 }
 
 .taskType {
 font-weight:bold;
+}
+
+.teacherP {
+font-size:20px;
+font-weight:bolder;
 }
 
 .rightButton {

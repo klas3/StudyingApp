@@ -2,15 +2,18 @@
 
 @{
     ViewData["Title"] = "Course";
+    ViewBag.Space = "         ";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h1 class="text-center m-5">@Html.DisplayFor(modelItem => modelItem.Name)</h1>
 <div>
+    <div>
     <h3 class="p-3">Викладач:</h3>
-    <p class="ml-3">@Html.DisplayFor(modelItem => Model.User.FirstName) @Html.DisplayFor(modelItem => Model.User.LastName)</p>
-    <h3 class="p-3">Тривалість:</h3>
-    <p class="ml-3">@Html.DisplayFor(modelItem => Model.StartDate) - @Html.DisplayFor(modelItem => Model.EndDate)</p>
+    <p class="ml-3 teacherP">@Html.DisplayFor(modelItem => Model.User.FirstName) @Html.DisplayFor(modelItem => Model.User.LastName) Test Teacher</p>
+    </div>
+        <h3 class="p-3">Тривалість:</h3>
+    <p class="ml-3 teacherP">@Html.DisplayFor(modelItem => Model.StartDate) - @Html.DisplayFor(modelItem => Model.EndDate)</p>
     <h3 class="p-3">Список модулів:</h3>
     <div id="accordion">
         @{ int i = 1;}
