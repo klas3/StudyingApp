@@ -12,7 +12,7 @@ using StudyingApp.ViewModels;
 
 namespace StudyingApp.Controllers
 {
-    [Authorize (Roles = "Student")]
+    [Authorize (Roles = "Student, Teacher, Admin")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -42,7 +42,7 @@ namespace StudyingApp.Controllers
             return View();
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public IActionResult Students()
         {
             IEnumerable<Student> students = _repository.GetStudentsList(true);
