@@ -20,7 +20,7 @@
             </div>
 </form>
     }
-    @if (User.IsInRole("Student") || User.IsInRole("Administrator"))
+    @if (User.IsInRole("Student") || User.IsInRole("Admin"))
     {
 
         <button type="button" class="btn btn-info mt-3" onclick="location.href='@Url.Action("AddCourse", "Home")'">
