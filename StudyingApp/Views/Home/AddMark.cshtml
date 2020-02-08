@@ -7,44 +7,19 @@
 @*<h1>AddMark</h1>
 <form class="loginForm" method="post" enctype="multipart/form-data" asp-action="">
     <div asp-validation-summary="ModelOnly"></div>
+
     <div class="form-group">
-        <label asp-for="Modules"></label>
-        <select asp-for="Modules" class="form-control">
-            @foreach (var modules in Model.Modules)
-            {
-                <option>@Html.DisplayFor(modulesItem => modules.ModuleName)</option>
-            }
-        </select>
-        <span asp-validation-for="Modules"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Listeners"></label>
-        <select asp-for="Listeners" class="form-control">
-            @foreach (var listeners in Model.Listeners)
-            {
-                <option>@Html.DisplayFor(listenersItem => listeners.Student.User.LastName) @Html.DisplayFor(listenersItem => listeners.Student.User.FirstName) @Html.DisplayFor(listenersItem => listeners.Student.User.MiddleName)</option>
-            }
-        </select>
-        <span asp-validation-for="Listeners"></span>
-    </div>
-    <div class="form-group">
-        <label>Тип завдання</label>
+        <label asp-for="Listener"></label>
         <select class="form-control">
-            <option >Тест</option>
-            <option>Лабораторна</option>
+            <option >Студент1</option>
+            <option>Студент2</option>
         </select>
-        <span asp-validation-for="Listeners"></span>
+        <span asp-validation-for="Listener"></span>
     </div>
 
     <div class="form-group">
-        <label asp-for="LabMark"></label>
-        <input asp-for="LabMark" type="text" class="form-control col-xs-4">
-        <span asp-validation-for="LabMark"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="TestMark"></label>
-        <input asp-for="TestMark" type="text" class="form-control col-xs-4">
-        <span asp-validation-for="TestMark"></span>
+        <label asp-for="Mark"></label>
+        <input asp-for="Mark" type="text" class="form-control col-xs-4">
     </div>
     <button type="button" class="btn btn-secondary" data-dismiss="modal">Скасувати</button>
     <button type="submit" class="btn btn-success">
