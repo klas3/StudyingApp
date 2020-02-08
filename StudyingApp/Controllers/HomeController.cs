@@ -12,7 +12,7 @@ using StudyingApp.ViewModels;
 
 namespace StudyingApp.Controllers
 {
-    [Authorize (Roles = "Student, Teacher, Admin")]
+    [Authorize (Roles = "Student, Teacher, Admin, Unverified")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -24,12 +24,13 @@ namespace StudyingApp.Controllers
             _repository = repository;
         }
 
+        [Authorize(Roles = "Student, Teacher, Admin, Unverified")]
         public IActionResult Index()
         {
             return View();
         }
 
-        [Authorize]
+        [Authorize(Roles = "Student, Teacher, Admin")]
         public IActionResult Schedule()
         {
             IEnumerable<Module> modules = _repository.GetScheduleModulesList();
@@ -49,13 +50,14 @@ namespace StudyingApp.Controllers
             return View(students);
         }
 
-        [Authorize]
+        [Authorize(Roles = "Student, Teacher, Admin")]
         public IActionResult Courses()
         {
             IEnumerable<Course> courses = _repository.GetCoursesList();
             return View(courses);
         }
 
+        [Authorize(Roles = "Student, Teacher, Admin")]
         [HttpGet]
         public IActionResult Rating()
         {
@@ -90,7 +92,7 @@ namespace StudyingApp.Controllers
             return View(model);
         }
 
-        [Authorize]
+        [Authorize(Roles = "Student, Teacher, Admin")]
         [HttpPost]
         public IActionResult Rating(RatingViewModel viewModel)
         {
@@ -182,6 +184,7 @@ namespace StudyingApp.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Teacher, Admin")]
         [HttpGet]
         public IActionResult AddMark()
         {
