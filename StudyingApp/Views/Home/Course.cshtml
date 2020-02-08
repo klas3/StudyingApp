@@ -1,4 +1,4 @@
-﻿@model StudyingApp.Models.Course
+@model StudyingApp.Models.Course
 
 @{
     ViewData["Title"] = "Course";
@@ -36,5 +36,11 @@
             i++;
         }
     </div>
+    @if (User.IsInRole("Teacher") || User.IsInRole("Administrator"))
+    {
+        <button type="button" class="btn btn-info" onclick="location.href='@Url.Action("Register", "Account")'">
+            Додати модуль
+        </button>
+    }
 </div>
 

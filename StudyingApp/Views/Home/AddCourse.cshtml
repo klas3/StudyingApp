@@ -1,0 +1,35 @@
+﻿@model StudyingApp.Models.Course;
+@{
+    ViewData["Title"] = "AddCourse";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>AddCourse</h1>
+<form class="loginForm" method="post" enctype="multipart/form-data" asp-action="">
+    <div asp-validation-summary="ModelOnly"></div>
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" type="text" class="form-control">
+        <span asp-validation-for="Name"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Year"></label>
+        <input asp-for="Year" type="number" class="form-control">
+        <span asp-validation-for="Year"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="StartDate"></label>
+        <input asp-for="StartDate" type="date" class="form-control">
+        <span asp-validation-for="StartDate"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Password"></label>
+        <input asp-for="Password" type="date" class="form-control">
+        <span asp-validation-for="Password"></span>
+    </div>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Скасувати</button>
+        <button type="submit" class="btn btn-success">
+            Зберегти
+        </button>
+</form>
+
