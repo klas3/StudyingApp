@@ -153,15 +153,15 @@ namespace StudyingApp.Controllers
             return View();
         }
 
-        [HttpGet]
-        public IActionResult AddModule(int courseId)
+        
+        public IActionResult AddModule(int id)
         {
-            ViewBag.CourseId = courseId;
+            ViewBag.CourseId = id;
             return View();
         }
 
-        [HttpPost]
-        public IActionResult AddModule(ModuleViewModel model, int courseId)
+        [HttpPost, ActionName("AddModule")]
+        public IActionResult AddModulePost(ModuleViewModel model, int courseid)
         {
             if (ModelState.IsValid)
             {
@@ -171,7 +171,7 @@ namespace StudyingApp.Controllers
                     IsTest = model.IsTest,
                     IsLab = model.IsLab,
                     Date = model.Date,
-                    CourseId = courseId
+                    CourseId = courseid
                 };
 
                 _repository.CreateModule(module);
