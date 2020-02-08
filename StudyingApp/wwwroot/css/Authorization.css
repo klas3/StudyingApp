@@ -30,6 +30,11 @@ width:80% !important;
 font-weight:bold;
 }
 
+.teacherP {
+font-size:20px;
+font-weight:bolder;
+}
+
 .rightButton {
 float:right;
 }
