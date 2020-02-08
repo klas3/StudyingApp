@@ -40,11 +40,13 @@
                             <span>@Html.DisplayFor(modelItem => task.Descrition)</span>
                             @if (User.IsInRole("Teacher") || User.IsInRole("Admin"))
                             {
-                                <button type="button" class="btn btn-outline-success myButton10 rightButton" onclick="location.href='@Url.Action("AddMark", "Home")'">
-                                    Оцінити
-                                </button>
+                                <form method="get" enctype="multipart/form-data" asp-action="AddMark" asp-controller="Home" asp-route-id="@task.TaskId">
+                                    <button type="submit" class="btn btn-outline-success myButton10 rightButton">
+                                        Оцінити
+                                    </button>
+                                </form>
                             }
-                        </div>
+                            </div>
                         }
                     </div>
                 </div>

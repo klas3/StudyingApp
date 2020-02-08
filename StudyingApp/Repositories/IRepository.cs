@@ -24,5 +24,10 @@ namespace StudyingApp.Repositories
         IEnumerable<Module> GetScheduleModulesList();
         IEnumerable<Student> GetRatingStudents(int? year, int? courseId, int? studentId);
         void CreateCourse(Course course);
+        void CreateMark(Mark mark);
+        void CreateListenersForCourse(int id);
+        int GetLastCourseId();
+        int GetLastModuleId();
+        void AddTest(int moduleId);
     }
 }

@@ -9,10 +9,11 @@ namespace StudyingApp.ViewModels
     {
         [Display(Name = "Студент")]
         [Required(ErrorMessage = "Оберіть студента")]
-        public virtual Listeners Listeners { get; set; }
+        public virtual int StudentId { get; set; }
 
 
         [Display(Name = "Оцінка")]
+        [Required(ErrorMessage = "Виставіть оцінку")]
         public int Mark { get; set; }
 
     }

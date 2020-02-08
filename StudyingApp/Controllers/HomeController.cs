@@ -142,6 +142,7 @@ namespace StudyingApp.Controllers
                     };
 
                     _repository.CreateCourse(course);
+                    _repository.CreateListenersForCourse(_repository.GetLastCourseId());
 
                     return RedirectToAction("Courses");
                 }
@@ -155,7 +156,42 @@ namespace StudyingApp.Controllers
             return View();
         }
 
-        
+        [HttpGet]
+        public IActionResult EditCourse(int id)
+        {
+            Course course = _repository.GetCourseById(id);
+            return View("AddCourse", course);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Teacher, Admin")]
+        public IActionResult AddMark(int id)
+        {
+            ViewBag.Students = _repository.GetStudentsList(true);
+            ViewBag.TaskId = id;
+            return View();
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Teacher, Admin")]
+        public IActionResult AddMark(MarkViewModel model, int id)
+        {
+            if (ModelState.IsValid)
+            {
+                _repository.CreateMark(new Mark
+                {
+                    TaskId = id,
+                    MarkValue = model.Mark,
+                    StudentId = model.StudentId
+                });
+
+                return RedirectToAction("Courses");
+            }
+
+            return View();
+        }
+
+        [HttpGet]
         public IActionResult AddModule(int id)
         {
             ViewBag.CourseId = id;
@@ -163,7 +199,7 @@ namespace StudyingApp.Controllers
         }
 
         [HttpPost, ActionName("AddModule")]
-        public IActionResult AddModulePost(ModuleViewModel model, int courseid)
+        public IActionResult AddModulePost(ModuleViewModel model, int id)
         {
             if (ModelState.IsValid)
             {
@@ -173,21 +209,15 @@ namespace StudyingApp.Controllers
                     IsTest = model.IsTest,
                     IsLab = model.IsLab,
                     Date = model.Date,
-                    CourseId = courseid
+                    CourseId = id
                 };
 
                 _repository.CreateModule(module);
+                _repository.AddTest(_repository.GetLastModuleId());
 
                 return RedirectToAction("Courses");
             }
 
-            return View();
-        }
-
-        [Authorize(Roles = "Teacher, Admin")]
-        [HttpGet]
-        public IActionResult AddMark()
-        {
             return View();
         }
 

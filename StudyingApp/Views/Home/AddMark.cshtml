@@ -4,27 +4,30 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@*<h1>AddMark</h1>
-<form class="loginForm" method="post" enctype="multipart/form-data" asp-action="">
+<h1>AddMark</h1>
+<form class="loginForm" method="post" enctype="multipart/form-data" asp-action="AddMark" asp-route-id="@ViewBag.TaskId">
     <div asp-validation-summary="ModelOnly"></div>
 
     <div class="form-group">
-        <label asp-for="Listener"></label>
-        <select class="form-control">
-            <option >Студент1</option>
-            <option>Студент2</option>
+        <label></label>
+        <select class="form-control" asp-for="StudentId">
+            @foreach(Student student in ViewBag.Students)
+            {
+                <option value="@student.StudentId">@Html.DisplayFor(moduleItem => student.User.FirstName) @Html.DisplayFor(moduleItem => student.User.LastName)</option>
+            }
         </select>
-        <span asp-validation-for="Listener"></span>
+        <span asp-validation-for="StudentId"></span>
     </div>
 
     <div class="form-group">
         <label asp-for="Mark"></label>
         <input asp-for="Mark" type="text" class="form-control col-xs-4">
+        <span asp-validation-for="Mark"></span>
     </div>
     <button type="button" class="btn btn-secondary" data-dismiss="modal">Скасувати</button>
     <button type="submit" class="btn btn-success">
         Зберегти
     </button>
-</form>*@
+</form>
 
 

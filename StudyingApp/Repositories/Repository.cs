@@ -147,15 +147,61 @@ namespace StudyingApp.Repositories
             _context.SaveChanges();
         }
 
+        public int GetLastModuleId()
+        {
+            List<Module> modules = _context.Modules.ToList();
+            return modules.Last().ModuleId;
+        }
+
+        public void AddTest(int moduleId)
+        {
+            _context.Tasks.Add(new Models.Task
+            {
+                ModuleId = moduleId,
+                Type = TaskTypes.Test,
+                Descrition = "Description"
+            });
+
+            _context.SaveChanges();
+        }
+
         public void CreateMark(Mark mark)
         {
             _context.Marks.Add(mark);
             _context.SaveChanges();
         }
 
+        public void CreateListenersForCourse(int id)
+        {
+            IEnumerable<Student> students = GetStudentsList(true);
+
+            foreach(Student student in students)
+            {
+                _context.Listeners.Add(new Listeners
+                {
+                    TotalMark = 0,
+                    CourseId = id,
+                    StudentId = student.StudentId
+                });
+            }
+
+            _context.SaveChanges();
+        }
+
+        public int GetLastCourseId()
+        {
+            List<Course> courses = _context.Courses.ToList();
+            return courses.Last().CourseId;
+        }
+
         public void SaveChanges()
         {
             _context.SaveChanges();
+        }
+
+        public Course GetCourseBuId(int id)
+        {
+            return _context.Courses.SingleOrDefault(course => course.CourseId == id);
         }
     }
 }
