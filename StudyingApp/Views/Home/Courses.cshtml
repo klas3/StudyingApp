@@ -14,13 +14,16 @@
             <button class="btn btn-primary text-center myButton90" type="submit">
                 @Html.DisplayFor(modelItem => item.Name)
             </button>
-            <button type="button" class="btn btn-warning myButton10" onclick="location.href='@Url.Action("AddCourse", "Home")'">
-                Редагувати
-            </button>
+            @if (User.IsInRole("Teacher") || User.IsInRole("Admin"))
+            {
+                <button type="button" class="btn btn-warning myButton10" onclick="location.href='@Url.Action("AddCourse", "Home")'">
+                    Редагувати
+                </button>
+            }
             </div>
 </form>
     }
-    @if (User.IsInRole("Student") || User.IsInRole("Admin"))
+    @if (User.IsInRole("Teacher") || User.IsInRole("Admin"))
     {
 
         <button type="button" class="btn btn-info mt-3" onclick="location.href='@Url.Action("AddCourse", "Home")'">
