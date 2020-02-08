@@ -7,7 +7,7 @@ using StudyingApp.Models;
 
 namespace StudyingApp.ViewModels
 {
-    public class CourseViewModel
+    public class MarkViewModel
     {
         [Display(Name = "Модуль")]
         [Required(ErrorMessage = "Оберіть модуль")]
