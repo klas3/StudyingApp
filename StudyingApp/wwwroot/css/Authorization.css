@@ -18,6 +18,26 @@
     padding-right: 50px;
 }
 
+.myButton90 {
+width:80% !important;
+}
+
+.btnTextLeft {
+    text-align:left !important;
+}
+
+.myButton80 {
+    width: 50% !important;
+}
+
+myDiv {
+display:table !important;
+}
+
+.myButton10 {
+    width: 19% !important;
+}
+
 div.validation-summary-errors * {
     color: red !important;
 }

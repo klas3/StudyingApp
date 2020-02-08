@@ -16,29 +16,39 @@
         @{ int i = 1;}
         @foreach (var item in Model.Modules)
         {
+        <div class="myDiv">
             <div class="card">
                 <div class="card-header" id="headingThree_@i">
                     <h5 class="mb-0">
-                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree_@i" aria-expanded="false" aria-controls="collapseThree_@i">
+                        <button class="btn btn-link myButton90 btnTextLeft" data-toggle="collapse" data-target="#collapseThree_@i" aria-expanded="false" aria-controls="collapseThree_@i">
                             @Html.DisplayFor(modelItem => item.ModuleName)
+                        </button>
+                        <button type="button" class="btn btn-outline-warning myButton10" onclick="location.href='@Url.Action("AddModule", "Home")'">
+                            Редагувати
                         </button>
                     </h5>
                 </div>
                 <div id="collapseThree_@i" class="collapse" aria-labelledby="headingThree_@i" data-parent="#accordion">
                     <div class="card-body">
-                        @foreach(var task in item.Tasks)
+                        @foreach (var task in item.Tasks)
                         {
+                            <div>
+                            <p>@Html.DisplayFor(modelItem => task.Type) : </p>
                             <p>@Html.DisplayFor(modelItem => task.Descrition)</p>
+                                </div>
                         }
                     </div>
                 </div>
+
             </div>
+            
+        </div>
             i++;
         }
     </div>
     @if (User.IsInRole("Teacher") || User.IsInRole("Administrator"))
     {
-        <button type="button" class="btn btn-info" onclick="location.href='@Url.Action("Register", "Account")'">
+        <button type="button" class="btn btn-info" onclick="location.href='@Url.Action("AddModule", "Home")'">
             Додати модуль
         </button>
     }
