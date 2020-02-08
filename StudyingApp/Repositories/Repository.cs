@@ -24,7 +24,7 @@ namespace StudyingApp.Repositories
 
         public Student GetStudentById(int id)
         {
-            return _context.Students.SingleOrDefault(s => s.StudentId == id);
+            return _context.Students.Include(u => u.User).SingleOrDefault(s => s.StudentId == id);
         }
 
         public void CreateStudent(Student student)
@@ -144,6 +144,11 @@ namespace StudyingApp.Repositories
         public void CreateMark(Mark mark)
         {
             _context.Marks.Add(mark);
+            _context.SaveChanges();
+        }
+
+        public void SaveChanges()
+        {
             _context.SaveChanges();
         }
     }

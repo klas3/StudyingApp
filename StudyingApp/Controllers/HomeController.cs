@@ -118,11 +118,11 @@ namespace StudyingApp.Controllers
             return View(course);
         }
 
-        [HttpGet]
-        public IActionResult AddMark()
-        {
-            return View();
-        }
+        //[HttpGet]
+        //public IActionResult AddMark()
+        //{
+        //    return View();
+        //}
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
