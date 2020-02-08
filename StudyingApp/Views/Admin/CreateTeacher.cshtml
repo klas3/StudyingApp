@@ -1,0 +1,43 @@
+﻿@model StudyingApp.Models.User
+@{
+    ViewData["Title"] = "CreateTeacher";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>CreateTeacher</h1>
+<form class="loginForm" method="post" enctype="multipart/form-data" asp-controller="Admin" asp-action="CreateStudent">
+    <div asp-validation-summary="ModelOnly"></div>
+    <div class="form-group">
+        <label asp-for="LastName"></label>
+        <input asp-for="LastName" type="text" class="form-control col-xs-4">
+        <span asp-validation-for="LastName"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="FirstName"></label>
+        <input asp-for="FirstName" type="text" class="form-control col-xs-4">
+        <span asp-validation-for="FirstName"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="MiddleName"></label>
+        <input asp-for="MiddleName" type="text" class="form-control col-xs-4">
+        <span asp-validation-for="MiddleName"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="UserName"></label>
+        <input asp-for="UserName" type="text" class="form-control col-xs-4">
+        <span asp-validation-for="UserName"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" type="email" class="form-control col-xs-4">
+        <span asp-validation-for="Email"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Password"></label>
+        <input asp-for="Password" type="password" class="form-control">
+        <span asp-validation-for="Password"></span>
+    </div>
+    <button type="submit" class="btn btn-success">
+        Створити
+    </button>
+</form>
