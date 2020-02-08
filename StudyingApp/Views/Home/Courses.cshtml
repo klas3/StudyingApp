@@ -11,21 +11,13 @@
     {
     <form asp-area="" asp-controller="Home" asp-action="Course" asp-route-id="@item.CourseId">
         <div class="mt-3">
-            @if (User.IsInRole("Teacher") || User.IsInRole("Admin"))
-            {
-                <button class="btn btn-primary text-center myButton90" type="submit">
-                    @Html.DisplayFor(modelItem => item.Name)
-                </button>
-                <button type="button" class="btn btn-warning myButton10" onclick="location.href='@Url.Action("AddCourse", "Home")'">
-                    Редагувати
-                </button>
-            }
-            @if (User.IsInRole("Student"))
+            @if (User.IsInRole("Teacher") || User.IsInRole("Admin") || User.IsInRole("Student"))
             {
                 <button class="btn btn-primary text-center myButton100" type="submit">
                     @Html.DisplayFor(modelItem => item.Name)
                 </button>
             }
+            
         </div>
 </form>
     }
