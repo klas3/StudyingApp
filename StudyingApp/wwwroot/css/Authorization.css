@@ -22,6 +22,10 @@
 width:80% !important;
 }
 
+.myButton100 {
+    width: 100% !important;
+}
+
 .btnTextLeft {
     text-align:left !important;
 }

@@ -22,21 +22,30 @@
                     @if (User.Identity.IsAuthenticated)
                     {
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Courses">Курси</a>
-                        </li>
-                        @if (User.IsInRole("Admin"))
+                        @if (User.IsInRole("Admin") || User.IsInRole("Student") || User.IsInRole("Teacher"))
                         {
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Students">Студенти</a>
+                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Courses">Курси</a>
                             </li>
                         }
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Rating">Рейтинг</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Schedule">Розклад</a>
-                            </li>
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Students">Студенти</a>
+                                </li>
+                            }
+                            @if (User.IsInRole("Admin") || User.IsInRole("Student") || User.IsInRole("Teacher"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Rating">Рейтинг</a>
+                                </li>
+                            }
+                            @if (User.IsInRole("Admin") || User.IsInRole("Student") || User.IsInRole("Teacher"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Schedule">Розклад</a>
+                                </li>
+                            }
                             @if (User.IsInRole("Admin"))
                             {
                                 <li class="nav-item">
