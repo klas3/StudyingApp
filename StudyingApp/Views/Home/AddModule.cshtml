@@ -23,10 +23,10 @@
     <div class="form-group">
         <label asp-for="Course"></label>
         <select asp-for="Course" class="form-control">
-            @foreach (course in ViewBag.Courses)
+            @*@foreach (course in ViewBag.Courses)
             {
                 <option>course</option>
-            }
+            }*@
         </select>
         <span asp-validation-for="Course"></span>
     </div>
