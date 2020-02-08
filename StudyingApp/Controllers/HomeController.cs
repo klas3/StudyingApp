@@ -62,7 +62,6 @@ namespace StudyingApp.Controllers
             return View(students);
         }
 
-        [Authorize]
         public IActionResult Course(int id)
         {
             var course = _repository.GetCourseById(id);
@@ -72,6 +71,24 @@ namespace StudyingApp.Controllers
             }
             return View(course);
         }
+
+        [HttpGet]
+        public IActionResult AddMark()
+        {
+            return View();
+        }
+
+        //[HttpPost]
+        //public async Task<IActionResult> AddMark(MarkViewModel model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        Mark mark = new Mark
+        //        {
+                    
+        //        }
+        //    }
+        //}
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
